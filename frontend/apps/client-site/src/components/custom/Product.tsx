@@ -1,4 +1,3 @@
-import React from 'react'
 import { ProductType } from '../../api/schema'
 import { ChevronRight } from 'lucide-react'
 
