@@ -1,18 +1,18 @@
-import { useQuery } from '@tanstack/react-query'
+// import { useQuery } from '@tanstack/react-query'
 import {Card} from '../../components/custom/Card'
 import { Footer } from '../../components/custom/Footer'
 import { Navbar } from '../../components/custom/Navbar'
 import Product from '../../components/custom/Product'
-import { getProductList } from '../../api/data/query'
+// import { getProductList } from '../../api/data/query'
 import Products from '../../api/data/dummy'
 
 export default function Home() {
-    const {data } = useQuery({
-        queryKey: ["products"], 
-        queryFn: () => getProductList()
+    // const {data } = useQuery({
+    //     queryKey: ["products"], 
+    //     queryFn: () => getProductList()
 
-    })
-    const productList = data?.data
+    // })
+    // const productList = data?.data
     return (
     <main className='flex flex-col items-start m-auto min-h-screen w-full '>
         <Navbar/>
