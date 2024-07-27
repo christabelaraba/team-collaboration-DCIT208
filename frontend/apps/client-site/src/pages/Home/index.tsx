@@ -4,6 +4,7 @@ import { Footer } from '../../components/custom/Footer'
 import { Navbar } from '../../components/custom/Navbar'
 import Product from '../../components/custom/Product'
 import { getProductList } from '../../api/data/query'
+import Products from '../../api/data/dummy'
 
 export default function Home() {
     const {data } = useQuery({
@@ -66,7 +67,8 @@ export default function Home() {
 
         {/* Product */}
         <section className='w-full h-full grid grid-cols-3 gap-10 py-16 px-32'>
-            {productList?.slice(0, 2).map(product => <Product key={product.id} {...product}/>)}
+            {/* {productList?.slice(0, 2).map(product => <Product key={product.id} {...product}/>)} */}
+            {Products.data.slice(0, 2).map(product => <Product key={product.id} {...product}/>)}
 
             <div className='bg-blue-900 p-5 mt-10 h-[80%]'>
                 <h3 className='text-white text-xl'>Top Products</h3>

@@ -1,4 +1,5 @@
 import { Search } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export const Navbar = () => {
     return(
@@ -18,19 +19,19 @@ export const Navbar = () => {
                         <a href="#">+23312341234</a>
                         </li>
                     <li>
-                        <a href="#">Contact Us</a>
+                        <Link to="/contactus">Contact Us</Link>
                     </li>
                     <li className="mr-2">
-                        <a href="#">FAQ</a>
+                        <Link to="/faq">FAQ</Link>
                     </li>
                 </ul>
                 <ul className="flex items-center gap-5">
                     <li ><Search className="text-orange-600"/></li>
                     <li>
-                        <a href="#">Home</a>
+                        <Link to="/">Home</Link>
                     </li>
                     <li >
-                        <a href="#">Generators</a>
+                        <Link to="/generator">Generators</Link>
                     </li>
                     <li>
                         <a href="#">News</a>
