@@ -3,6 +3,8 @@ import Product from '../../components/custom/Product'
 import { useQuery } from '@tanstack/react-query'
 import { getProductList } from '../../api/data/query'
 import { Footer } from '../../components/custom/Footer'
+import { FileQuestion } from 'lucide-react'
+import Products from '../../api/data/dummy'
 
 export default function Generators() {
      const {data } = useQuery({
@@ -11,6 +13,7 @@ export default function Generators() {
 
     })
     const productList = data?.data
+    console.log(productList)
   return (
     <main className='flex flex-col items-start m-auto min-h-screen w-full '>
         <Navbar/>
@@ -55,7 +58,8 @@ export default function Generators() {
             </div>
 
             <div className='w-full col-span-2 grid grid-cols-2 gap-4'>
-                {productList?.map(product => <Product key={product.id} {...product}/>)}
+                {/* {productList?.slice(0, 2).map(product => <Product key={product.id} {...product}/>)} */}
+                {Products.data.map(product => <Product key={product.id} {...product}/>)}             
             </div>
         </section>
 
@@ -64,6 +68,7 @@ export default function Generators() {
             <div className=' flex flex-col justify-center relative pl-32'>
                 <div className='flex items-center gap-5'>
                   <div className='h-16 w-16 rounded-full bg-orange-600 flex justify-center items-center'>
+                        <FileQuestion className="text-white size-10"/>
                     </div>  
                     <h3 className='text-3xl font-semibold'>
                         MAKE ENQUIRY
@@ -74,11 +79,20 @@ export default function Generators() {
                     Didn't find what you were looking for? No problem! Contact us today to discuss your generator needs and let us help you find the perfect solution.
                 </p>
             </div>
-            <div className='w-full grid grid-cols-2 gap-10 py-16'>
-                <input id='text' placeholder='First Name' className='w-full h-16 text-white bg-black shadow-sm border-black rounded-lg'>
-                    
-                </input>
+            <div className='w-full gap-x-72 gap-y-6 py-16 tracking-wider'>
+                <div className='w-full grid grid-cols-2 gap-x-72 gap-y-6 py-10 tracking-wider'>
+                    <input id='text' placeholder='First Name' className='w-96 h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'/>
+                    <input id='text' placeholder='Last Name' className='w-96 h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'/>
+                    <input id='email' placeholder='Email' className='w-96 h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'/>
+                    <input id='text' placeholder='Phone Number' className='w-96 h-16 text-gray-700 bg-white shadow-md border-black rounded-lg px-5'/> 
+                </div>
+                
+                <div className='w-full tracking-widest'>
+                    <textarea id='message' placeholder='Message' className='w-full h-40  text-gray-700 bg-white shadow-md border-black rounded-lg px-5 '/>   
+                    <button  type="submit" className="w-32 text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-600 mx-auto uppercase tracking-wider">Send</button>
+                </div>
             </div>
+
         </section>
         <Footer />
         

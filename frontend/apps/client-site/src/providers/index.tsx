@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button';
-import { useRouter } from '@/routes/hooks';
+
+import { useRouter } from '../routes/hooks';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Suspense } from 'react';
@@ -23,9 +23,9 @@ const ErrorFallback = ({ error }: FallbackProps) => {
       </h2>
       <pre className="text-2xl font-bold">{error.message}</pre>
       <pre>{error.stack}</pre>
-      <Button className="mt-4" onClick={() => router.back()}>
+      <button className="mt-4" onClick={() => router.back()}>
         Go back
-      </Button>
+      </button>
     </div>
   );
 };
