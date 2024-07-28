@@ -4,9 +4,19 @@ import { Footer } from '../../../components/custom/Footer'
 import Products from '../../../api/data/dummy'
 import Product from '../../../components/custom/Product'
 import { Download, Phone } from 'lucide-react'
+import { getSingleProduct } from '../../../api/data/query'
+import { useQuery } from '@tanstack/react-query'
+import { ProductType } from '../../../api/schema'
 
 export default function Details() {
 const {id} = useParams()
+
+const { data } = useQuery({
+        queryKey: ["products"],
+        queryFn: () => getSingleProduct(id as string)
+    })
+    const productList: ProductType = data?.data 
+    console.log(productList)
 
 const openModal = (modalId: string) => {
     const modal = document.getElementById(modalId) as HTMLDialogElement | null;
@@ -20,39 +30,39 @@ const openModal = (modalId: string) => {
         <Navbar/>
 
         {/* Generator Details */}
-        <section className='w-full grid grid-cols-2 py-10 px-10'>
-            <div>
-            <h2 className='font-bold text-6xl py-3'>
-                100 KVA
+        <section className='w-full flex items-center justify-between mt-20 py-10 px-10'>
+            <div className='w-1/2'>
+            <h2 className='font-bold uppercase text-6xl py-3'>
+               {productList.prime}
             </h2>
 
-            <h4 className='font-semibold text-orange-600 uppercase text-xl mb-5'>
-                Single phase silent diesel generator
+            <h4 className='font-semibold text-orange-600 capitalize text-xl mb-5'>
+                {productList.description}
             </h4>
-            <div className='w-full grid grid-cols-2 '>
+            <div className='w-full grid grid-cols-2 max-w-[500px]'>
                 <div>
-                    <div className='w-full flex flex-row'>
+                    <div className='w-full flex gap-2 items-center'>
                     <p className='text-black'>
                         Engine:
                     </p>
-                    <p className='text-gray-500'>
-                        YIYTUR-JFDH
+                    <p className='text-gray-500 capitalize'>
+                       {productList.engine}
                     </p>
                 </div>
-                <div className='w-full flex flex-row'>
+                <div className='w-full flex gap-2 items-center mt-2'>
                     <p className='text-black'>
                         Prime:
                     </p>
-                    <p className='text-gray-500'>
-                        YIYTUR-JFDH
+                    <p className='text-gray-500 capitalize'>
+                        {productList.prime}
                     </p>
                 </div>
-                <div className='w-full flex flex-row'>
+                <div className='w-full flex gap-2 items-center mt-2'>
                     <p className='text-black'>
                         Alternator:
                     </p>
                     <p className='text-gray-500'>
-                        YIYTUR-JFDH
+                        {productList.alternator}
                     </p>
                 </div>
                 <div className='py-5'>
@@ -61,28 +71,28 @@ const openModal = (modalId: string) => {
                 </div>
                 
                 <div className=''>
-                    <div className='w-full flex flex-row'>
+                    <div className='w-full flex gap-2 items-center '>
                         <p className='text-black'>
                             Voltage:
                         </p>
                         <p className='text-gray-500'>
-                            YIYTUR-JFDH
+                            {productList.voltage}
                         </p>
                     </div>
-                    <div className='w-full flex flex-row'>
+                    <div className='w-full flex mt-2 gap-2 items-center'>
                         <p className='text-black'>
                             Frequency:
                         </p>
                         <p className='text-gray-500'>
-                            YIYTUR-JFDH
+                            {productList.frequency}
                         </p>
                     </div>
-                    <div className='w-full flex flex-row'>
+                    <div className='w-full flex mt-2 gap-2 items-center'>
                     <p className='text-black'>
                         Amp Per Phase:
                     </p>
                     <p className='text-gray-500'>
-                        YIYTUR-JFDH
+                        {productList.amp_per_phase}
                     </p>
                 </div>
                 <div className='py-5'>
@@ -92,9 +102,12 @@ const openModal = (modalId: string) => {
             </div>
             </div>
             
-            <div>
-                {Products.data.slice(0, 1).map(product => <Product key={product.id} {...product}/>)}
-                index:{id}
+            {/* <div>
+                <Product key={productList.id} {...productList}/>
+
+            </div> */}
+            <div className=''>
+                <img src={productList.picture_url || "https://res.cloudinary.com/dzgzufiwm/image/upload/v1722091461/Jingdoli/Products/yga000scjqa51yutmyg4.jpg"} alt={productList?.model!} className=''/>
             </div>
         </section>
 
@@ -104,8 +117,27 @@ const openModal = (modalId: string) => {
                 Technical Problems
             </h3>
 
-            <div>
-
+            <div className='w-full flex flex-col items-center my-5'>
+                <div className='  w-10/12 '>
+                    <div className='flex border-y h-16 w-full items-center justify-between px-96'>
+                        <p>{productList?.model} {productList?.prime}</p>
+                        <p>{productList?.voltage}</p>
+                    </div>
+                    <div className='flex border-b h-16 w-full items-center justify-between px-96'>
+                        <p>{productList?.prime}</p>
+                        <p>{productList?.voltage}</p>
+                    </div>
+                </div>
+                <div className='  w-10/12 '>
+                    <div className='flex border-y h-16 w-full items-center justify-between px-96 opacity-25'>
+                        <p>{productList?.voltage}</p>
+                        <p>{productList?.model} {productList?.prime}</p>
+                    </div>
+                    <div className='flex border-b h-16 w-full items-center justify-between px-96 opacity-10'>
+                        <p>{productList?.voltage}</p>
+                        <p>{productList?.prime}</p>
+                    </div>
+                </div>
             </div>
 
             <div className='py-5'>
@@ -115,34 +147,35 @@ const openModal = (modalId: string) => {
 
         {/* Related Products */}
         <section className='w-full px-10 py-10'>
-            <h3 className='font-semibold text-4xl text-black mb-5'>
+            {/* <h3 className='font-semibold text-4xl text-black mb-5'>
                 Related Products
-            </h3>
+            </h3> */}
 
-            <div className='w-full grid grid-cols-2'>
+            <div className='w-full flex justify-center'>
+                <div className='w-8/12 flex items-center'>
                 <div className='w-full'>
                     <div className='flex flex-row items-center justify-center'>
-                        <p className='text-xl'>
+                        <p className='text-xl text-center'>
                             For more information about 
-                        </p>
-                        <p className='font-semibold text-gray-700 uppercase text-xl'>
-                            Long Lian Industry and Trade Generators
-                        </p>
+                            <span className='font-semibold text-gray-700 uppercase text-xl'> Long Lian Industry and Trade Generators</span>
+                         {' '}Get in touch to speak with our experts
+                        </p>   
                     </div>
-                    <p className='text-gray-500 flex items-center justify-center text-lg'>
-                        Get in touch to speak with our experts
-                    </p>
                 </div>
-                <div className='ml-10'>
-                    <Link to="/contactus"  className="w-48 text-lg h-20 bg-orange-600 text-white rounded uppercase tracking-wider font-semibold">Contact Us </Link>
+                <div className=' w-6/12 ml-10'>
+                    <Link to="/contactus"  className="w-48 p-5 text-lg h-20 bg-orange-600 text-white rounded uppercase tracking-wider font-semibold">Contact Us </Link>
                 </div>
+            </div>
             </div>
         </section>
         <Footer/>
 
         {/* Enquiry Modal */}
       <dialog id="enquiry_modal" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
+        <div className="modal-box max-w-[600px]">
+             <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 text-orange-600">✕</button>
+          </form>
             <div className='flex items-center justify-center flex-col'>
                 <div className="">
                <span>
@@ -182,10 +215,10 @@ const openModal = (modalId: string) => {
       </dialog>
 
        {/* Order Modal */}
-      <dialog id="order_modal" className="modal">
-        <div className="modal-box">
+      <dialog id="order_modal" className="modal ">
+        <div className="modal-box max-w-[600px]">
           <form method="dialog">
-            <button className="btn btn-lg btn-circle btn-ghost absolute right-2 text-orange-600">✕</button>
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 text-orange-600">✕</button>
           </form>
           
           <div className='flex items-center justify-center flex-col'>
