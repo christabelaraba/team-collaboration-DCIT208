@@ -1,63 +1,50 @@
 export const Footer = () => {
-  return (
-   <footer className="w-full flex flex-col bg-[#00072D]">
-        <div className="grid grid-cols-5 px-5">
-            <div>
-                <img src="./assets/logo_white.png" alt="logo_white" className="w-56 pt-4"/>
+    return (
+      <footer className="w-full flex flex-col bg-[#00072D]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4 sm:px-6 lg:px-8 py-10">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
+            <img src="./assets/logo_white.png" alt="logo_white" className="w-48 sm:w-56 lg:w-64 max-w-full" />
+          </div>
+          
+          <div className="w-full">
+            <h3 className="text-white text-xl lg:text-2xl tracking-wider mb-4">Quick Links</h3>
+            <ul className="flex flex-col gap-3 text-white tracking-wide">
+              <li><a href="#" className="hover:text-orange-500 transition-colors">About Us</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors">Products</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors">Contact Us</a></li>
+            </ul>
+          </div>
+          
+          <div className="w-full">
+            <h3 className="text-white text-xl lg:text-2xl tracking-wider mb-4">Further Information</h3>
+            <ul className="flex flex-col gap-3 text-white tracking-wide">
+              <li><a href="#" className="hover:text-orange-500 transition-colors">Terms and conditions</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors">FAQ</a></li>
+            </ul>
+          </div>
+          
+          <div className="w-full">
+            <h3 className="text-white text-xl lg:text-2xl tracking-wider mb-4">Contact Information</h3>
+            <ul className="flex flex-col gap-3 text-white tracking-wide">
+              <li>Address: Adjecent Sunu Assurance</li>
+              <li>Phone: +233 535 097 486</li>
+              <li>Email: jingdoli@gmail.com</li>
+            </ul>
+          </div>
+          
+          <div className="w-full col-span-1 sm:col-span-2 lg:col-span-1">
+            <h3 className="text-white text-xl lg:text-2xl tracking-wider mb-4">Newsletter</h3>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <input type="email" className="flex-grow w-full sm:w-auto h-12 p-3 text-black" placeholder="Your email" />
+              <button className="w-full sm:w-auto h-12 px-4 bg-orange-500 text-white text-base tracking-wider hover:bg-orange-600 transition-colors">Subscribe</button>
             </div>
-            <div className="w-full mt-20 mb-10">
-                <h3 className="text-white text-2xl tracking-widest"> Quick Links</h3>
-                <ul className="mt-5 flex flex-col gap-5 text-white tracking-wider">
-                    <li>
-                        <a href="#">About Us</a>
-                    </li>
-                    <li>
-                        <a href="#">Products</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact Us</a>
-                    </li>
-                </ul>
-            </div>
-             <div className="w-full mt-20 mb-10">
-                <h3 className="text-white text-2xl tracking-widest"> Further Information </h3>
-                <ul className="mt-5 flex flex-col gap-5 text-white tracking-wider">
-                    <li>
-                        <a href="#">Terms and conditions </a>
-                    </li>
-                    <li>
-                        <a href="#">Privacy Policy</a>
-                    </li>
-                    <li>
-                        <a href="#">FAQ</a>
-                    </li>
-                </ul>
-            </div>
-             <div className="w-full mt-20 mb-10">
-                <h3 className="text-white text-2xl tracking-widest"> Contact Information</h3>
-                <ul className="mt-5 flex flex-col gap-5 text-white tracking-wider">
-                    <li>
-                        <a href="#">Address: Adjecent Sunu Assurance </a>
-                    </li>
-                    <li>
-                        <a href="#">Phone: +233 535 097 486</a>
-                    </li>
-                    <li>
-                        <a href="#">Email: jingdoli@gmail.com</a>
-                    </li>
-                </ul>
-            </div>
-            <div className="w-full h-full flex flex-col justify-center">
-                <h3 className="text-white text-2xl tracking-widest">Newsletter</h3>
-                <div className="flex mt-5">
-                    <input type="text" className="w-44 h-14 p-3" placeholder="Your email"/>
-                    <button className="w-32 h-14 bg-orange-500 text-white text-base tracking-widest">Subscribe</button>
-                </div>
-            </div>
+          </div>
         </div>
-        <div className="w-full h-12 flex justify-center items-center bg-[#5738814D] ">
-            <p className="text-white text-lg tracking-wider">Copyright @ 2024. All rights reserved</p>
+        
+        <div className="w-full py-4 flex justify-center items-center bg-[#5738814D]">
+          <p className="text-white text-sm sm:text-base tracking-wide text-center px-4">Copyright @ 2024. All rights reserved</p>
         </div>
-   </footer>
-  )
-}
+      </footer>
+    );
+  };
