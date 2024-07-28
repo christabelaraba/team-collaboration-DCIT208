@@ -163,11 +163,19 @@ export default function Home() {
         </section>
 
         {/* Kpi */}
+<<<<<<< HEAD
+         <section className='w-full bg-[url("/assets/kpi.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
+            <div className='w-full grid grid-cols-3 gap-10 bg-[#000522BF] p-10 py-40'>
+                <div className="w-full flex flex-col items-center gap-5">
+                    <div className="w-44 h-44 rounded-full bg-[#FBECE6] mt-5 items-center justify-center flex relative">
+                        <img src="/assets/20-years.png" alt="20 years" className="h-36 w-36"/> 
+=======
         <section className='w-full bg-[url("/assets/kpi.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
             <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 bg-[#000522BF] p-6 sm:p-8 md:p-10 py-16 sm:py-20 md:py-32 lg:py-44'>
                 <div className="w-full flex flex-col items-center gap-4 sm:gap-5">
                     <div className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full bg-[#FBECE6] mt-4 sm:mt-5 items-center justify-center flex relative">
                         <img src="/assets/20-years.png" alt="20 years" className="h-24 w-24 sm:h-28 sm:w-28 md:h-36 md:w-36"/> 
+>>>>>>> 0b287350edc44d92f28390c6d7078a261b0e63d5
                     </div>
                     <div>
                         <p className="text-base sm:text-lg md:text-xl text-white max-w-60 sm:max-w-80 text-center">Focus on generator set products</p>

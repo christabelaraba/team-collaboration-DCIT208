@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react'
 export default function Product(props:ProductType) {
    
   return (
-    <div className='w-full h-56 mb-20 rounded shadow-2xl '>
+    <div className='w-full h-56 mb-20 rounded-md shadow-2xl '>
         <div className='bg-white relative overflow-hidden w-full h-full flex justify-center items-center p-10'>
             <img src={props.picture_url} alt={props.model} className=''/>
         </div>
