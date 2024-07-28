@@ -22,6 +22,7 @@ export const ProductSchema = z.object({
     type: z.string().optional(),
     voltage: z.string().optional(),
     warranty: z.string().optional()
+
 })
 
 export const ProductResponseSchema = z.object({
