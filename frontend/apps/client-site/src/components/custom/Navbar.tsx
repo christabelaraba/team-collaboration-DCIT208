@@ -7,7 +7,7 @@ export const Navbar = () => {
             <nav className="w-full p-10 hidden lg:flex items-center justify-between">
             <div className="text-5xl">
                <span>
-                    <img src="./assets/logo.png" alt="logo" className="w-96"/>
+                    <img src="/assets/logo.png" alt="logo" className="w-96"/>
                 </span>
             </div>
             <div className="flex flex-col items-end gap-8 ">
@@ -16,7 +16,7 @@ export const Navbar = () => {
                         <a href="#">中文</a>
                     </li>
                     <li className="border-x border-black px-5">
-                        <a href="#">+23312341234</a>
+                        <a href="#">+233555097486</a>
                         </li>
                     <li>
                         <Link to="/contactus">Contact Us</Link>
