@@ -199,14 +199,47 @@ export default function Home() {
         </section>
 
         {/* testimonials */}
-        <section className='w-full flex flex-col items-center p-6 sm:p-8 md:p-10 py-16 sm:py-20 md:py-32 lg:py-44'>
-            <h3 className='text-orange-500 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-wider text-center'>
+        <section className='w-full flex flex-col items-center  p-10 py-44'>
+            <h3 className=' text-orange-500 text-4xl font-semibold tracking-wider'>
                 Clients Testimonials
             </h3>
-            <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 mt-8 sm:mt-10 max-w-[1450px]'>
-                <Card/>
-                <Card/>
-                <Card/>
+            <div className='w-full grid grid-cols-3 gap-10 mt-10 max-w-[1450px]'>
+                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
+                    <div className="flex items-center gap-3">
+                        <img src="./assets/card3.jpeg" alt="logo" className="w-16 h-16  rounded-full"/>
+                    <div>
+                        <h3 className="text-lg text-orange-500 font-medium">Prof Fredrick Abban</h3>
+                        <p className="text-sm text-gray-500">Deputy Speaker</p>
+                    </div>
+                    </div>
+                    <div className="pt-5">
+                        Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough
+                    </div>
+                </div>
+                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
+                    <div className="flex items-center gap-3">
+                        <img src="./assets/card1.jpg" alt="logo" className="w-16 h-16  rounded-full"/>
+                    <div>
+                        <h3 className="text-lg text-orange-500 font-medium">Xia Wanqiu</h3>
+                        <p className="text-sm text-gray-500">Deputy Speaker</p>
+                    </div>
+                    </div>
+                    <div className="pt-5">
+                        Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough
+                    </div>
+                </div>
+                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
+                    <div className="flex items-center gap-3">
+                        <img src="./assets/card2.png" alt="logo" className="w-16 h-16  rounded-full"/>
+                    <div>
+                        <h3 className="text-lg text-orange-500 font-medium">Prof Freda Abban</h3>
+                        <p className="text-sm text-gray-500">Deputy Speaker</p>
+                    </div>
+                    </div>
+                    <div className="pt-5">
+                        Long Lian Industry and Trade's products have revolutionized our business. Their generators are incredibly reliable, efficient, and durable. I highly recommend them to everyone.
+                    </div>
+                </div>
             </div>
         </section>
         <Footer/>

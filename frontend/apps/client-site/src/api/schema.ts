@@ -1,27 +1,28 @@
 import { z } from "zod";
 
 export const ProductSchema = z.object({
-    active_status: z.number().nullable(),
-    alternator: z.string().nullable(),
-    amp_per_phase: z.string().nullable(),
-    color: z.string().nullable(),
-    createdAt: z.string().nullable(),
-    delete_status: z.number().nullable(),
-    description: z.string().nullable(),
-    engine: z.string().nullable(),
-    frequency: z.string().nullable(),
-    fuel_type: z.string().nullable(),
-    id: z.number().nullable(),
-    model: z.string().nullable(),
-    other: z.string().nullable(),
-    picture_url: z.string().nullable(),
-    power: z.string().nullable(),
-    price: z.number().nullable(),
-    prime: z.string().nullable(),
-    size: z.string().nullable(),
-    type: z.string().nullable(),
-    voltage: z.string().nullable(),
-    warranty: z.string().nullable()
+    active_status: z.number().optional(),
+    alternator: z.string().optional(),
+    amp_per_phase: z.string().optional(),
+    color: z.string().optional(),
+    createdAt: z.string().optional(),
+    delete_status: z.number().optional(),
+    description: z.string().optional(),
+    engine: z.string().optional(),
+    frequency: z.string().optional(),
+    fuel_type: z.string().optional(),
+    id: z.number().optional(),
+    model: z.string().optional(),
+    other: z.string().optional(),
+    picture_url: z.string().optional(),
+    power: z.string().optional(),
+    price: z.number().optional(),
+    prime: z.string().optional(),
+    size: z.string().optional(),
+    type: z.string().optional(),
+    voltage: z.string().optional(),
+    warranty: z.string().optional()
+
 })
 
 export const ProductResponseSchema = z.object({
