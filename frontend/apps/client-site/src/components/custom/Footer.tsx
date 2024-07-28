@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export const Footer = () => {
   return (
    <footer className="w-full flex flex-col bg-[#00072D]">
@@ -9,13 +11,13 @@ export const Footer = () => {
                 <h3 className="text-white text-2xl tracking-widest"> Quick Links</h3>
                 <ul className="mt-5 flex flex-col gap-5 text-white tracking-wider">
                     <li>
-                        <a href="#">About Us</a>
+                        <Link to="/">About Us</Link>
                     </li>
                     <li>
-                        <a href="#">Products</a>
+                        <Link to="/generator">Products</Link>
                     </li>
                     <li>
-                        <a href="#">Contact Us</a>
+                        <Link to="/contactus">Contact Us</Link>
                     </li>
                 </ul>
             </div>
@@ -29,7 +31,7 @@ export const Footer = () => {
                         <a href="#">Privacy Policy</a>
                     </li>
                     <li>
-                        <a href="#">FAQ</a>
+                        <Link to="/faq">FAQ</Link>
                     </li>
                 </ul>
             </div>
@@ -37,7 +39,7 @@ export const Footer = () => {
                 <h3 className="text-white text-2xl tracking-widest"> Contact Information</h3>
                 <ul className="mt-5 flex flex-col gap-5 text-white tracking-wider">
                     <li>
-                        <a href="#">Address: Adjecent Sunu Assurance </a>
+                        <Link to="/contactus">Address: Adjecent Sunu Assurance </Link>
                     </li>
                     <li>
                         <a href="#">Phone: +233 535 097 486</a>

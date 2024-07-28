@@ -196,7 +196,7 @@ export default function Home() {
 
         {/* Kpi */}
          <section className='w-full bg-[url("/assets/kpi.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
-            <div className='w-full grid grid-cols-3 gap-10 bg-[#000522BF] p-10 py-44'>
+            <div className='w-full grid grid-cols-3 gap-10 bg-[#000522BF] p-10 py-40'>
                 <div className="w-full flex flex-col items-center gap-5">
                     <div className="w-44 h-44 rounded-full bg-[#FBECE6] mt-5 items-center justify-center flex relative">
                         <img src="/assets/20-years.png" alt="20 years" className="h-36 w-36"/> 
