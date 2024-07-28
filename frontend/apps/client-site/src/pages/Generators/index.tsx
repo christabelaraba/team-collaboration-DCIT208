@@ -11,7 +11,7 @@ export default function Generators() {
         queryKey: ["products"],
         queryFn: () => getProductList()
     })
-    const productList = data?.data
+    const productList = (data as any)?.data
 
     return (
         <main className='flex flex-col items-start m-auto min-h-screen w-full'>
@@ -46,7 +46,7 @@ export default function Generators() {
                         Quick Search
                     </h3>
                     <hr className='w-10/12 my-3 bg-black' />
-                {productList?.map(product => 
+                {productList?.map((product:any) => 
                <Link to={`/generators/details/${product.id}`}>
                     
                     <p className='text-black text-left text-sm sm:text-base  btn'>
@@ -57,7 +57,7 @@ export default function Generators() {
             </div>
 
                 <div className='w-full col-span-1 lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4'>
-                    {productList?.map(product => <Product key={product.id} {...product} />)}
+                    {productList?.map((product:any) => <Product key={product.id} {...product} />)}
                 </div>
             </section>
 

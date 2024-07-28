@@ -1,4 +1,3 @@
-import {Card} from '../../components/custom/Card'
 import { Footer } from '../../components/custom/Footer'
 import { Navbar } from '../../components/custom/Navbar'
 import Product from '../../components/custom/Product'
@@ -11,7 +10,7 @@ export default function Home() {
         queryKey: ["products"],
         queryFn: () => getProductList()
     })
-    const productList = data?.data
+    const productList = (data as any)?.data
     return (
         <main className="pt-14 sm:pt-16 md:pt-18 lg:pt-20">
         <Navbar/>
@@ -64,11 +63,11 @@ export default function Home() {
 
         {/* Product */}
         <section className='w-full h-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 md:gap-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-32'>
-            {productList?.slice(0, 2)?.map(product => <Product key={product.id} {...product}/>)}
+            {productList?.slice(0, 2)?.map((product:any) => <Product key={product.id} {...product}/>)}
             <div className='bg-blue-900 p-4 sm:p-5 mt-6 sm:mt-8 md:mt-10 h-auto sm:h-[90%] md:h-[85%] lg:h-[80%]'>
                 <h3 className='text-white text-lg sm:text-xl'>Top Products</h3>
                 <hr className='bg-gray-400 my-2 sm:my-3 w-10/12'/>
-            {productList?.slice(3, 5).map(product => 
+            {productList?.slice(3, 5).map((product:any) => 
                <Link to={`/generators/details/${product.id}`}>
                 <div className='bg-white h-8 sm:h-10 flex justify-center items-center relative mt-4 sm:mt-5 md:mt-7'>
                     <div className='bg-orange-600 w-1 sm:w-1.5 absolute left-0 h-full'></div>
