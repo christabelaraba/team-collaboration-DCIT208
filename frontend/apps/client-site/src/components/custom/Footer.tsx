@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const Footer = () => {
     return (
       <footer className="w-full flex flex-col bg-[#00072D]">
@@ -9,9 +11,9 @@ export const Footer = () => {
           <div className="w-full">
             <h3 className="text-white text-xl lg:text-2xl tracking-wider mb-4">Quick Links</h3>
             <ul className="flex flex-col gap-3 text-white tracking-wide">
-              <li><a href="#" className="hover:text-orange-500 transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors">Products</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors">Contact Us</a></li>
+              <li><Link to="/" className="hover:text-orange-500 transition-colors">About Us</Link></li>
+              <li><Link to="/generator" className="hover:text-orange-500 transition-colors">Products</Link></li>
+              <li><Link to="/contactus" className="hover:text-orange-500 transition-colors">Contact Us</Link></li>
             </ul>
           </div>
           
@@ -20,7 +22,7 @@ export const Footer = () => {
             <ul className="flex flex-col gap-3 text-white tracking-wide">
               <li><a href="#" className="hover:text-orange-500 transition-colors">Terms and conditions</a></li>
               <li><a href="#" className="hover:text-orange-500 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors">FAQ</a></li>
+              <li><Link to="/faq" className="hover:text-orange-500 transition-colors">FAQ</Link></li>
             </ul>
           </div>
           
