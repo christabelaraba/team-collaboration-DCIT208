@@ -3,6 +3,7 @@ import { Footer } from '../../components/custom/Footer'
 import { Navbar } from '../../components/custom/Navbar'
 import Product from '../../components/custom/Product'
 import Products from '../../api/data/dummy'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
     return (
@@ -15,9 +16,7 @@ export default function Home() {
                 <p className='text-white text-sm sm:text-base md:text-lg lg:text-xl w-full md:w-3/4 leading-normal mt-2 sm:mt-3 md:mt-5 lg:mt-10 tracking-wide sm:tracking-wider'>
                     To provide you with stable reliable electricity, Let you enjoy unlimited convienience in life
                 </p>
-                <button className='p-2 sm:p-3 md:p-4 lg:p-5 px-4 sm:px-6 md:px-8 lg:px-16 w-32 sm:w-36 md:w-40 lg:w-44 rounded-lg mt-3 sm:mt-4 md:mt-5 lg:mt-10 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl tracking-wider flex justify-center items-center bg-orange-700 text-white'>
-                    Explore
-                </button>
+                <Link to ="/generator" className='p-5 px-16 w-44 rounded-lg mt-10 text-3xl tracking-wider flex justify-center items-center bg-orange-700 text-white'>Explore</Link>
             </div>
         </section>
 
@@ -49,9 +48,7 @@ export default function Home() {
                     Africa is growing fast, but faces power shortages. China's "Belt and Road" initiative aims to help. We're excited to be part of it, bringing our products to support Africa's growth and development       
                 </p>
 
-                <button className='p-2 sm:p-3 text-base sm:text-lg md:text-xl max-w-32 sm:max-w-36 md:max-w-44 tracking-wider flex justify-center items-center bg-orange-600 text-white'>
-                    Learn more
-                </button>
+                <Link to="/faq" className='p-3 text-xl max-w-44 tracking-wider flex justify-center items-center bg-orange-600 text-white'>Learn more</Link>
             </div>
         </section>
 
