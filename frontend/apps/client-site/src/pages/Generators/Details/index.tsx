@@ -1,12 +1,9 @@
 import { Link, useParams } from 'react-router-dom'
 import { Navbar } from '../../../components/custom/Navbar'
 import { Footer } from '../../../components/custom/Footer'
-import Products from '../../../api/data/dummy'
-import Product from '../../../components/custom/Product'
 import { Download, Phone } from 'lucide-react'
 import { getSingleProduct } from '../../../api/data/query'
 import { useQuery } from '@tanstack/react-query'
-import { ProductType } from '../../../api/schema'
 
 export default function Details() {
 const {id} = useParams()
@@ -15,8 +12,7 @@ const { data } = useQuery({
         queryKey: ["products"],
         queryFn: () => getSingleProduct(id as string)
     })
-    const productList: ProductType = data?.data 
-    console.log(productList)
+    const productList:any  = (data as any)?.data 
 
 const openModal = (modalId: string) => {
     const modal = document.getElementById(modalId) as HTMLDialogElement | null;
