@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import Generators from '../pages/Generators';
 import ContactUs from '../pages/ContactUs';
 import FAQ from '../pages/FAQ';
+import Details from '../pages/Generators/Details';
 
 
 
@@ -37,7 +38,11 @@ export default function AppRouter() {
     {
       path: '*',
       element: <Navigate to="/404" replace />
-    }
+    },
+    {
+      path: '/generators/details/:id',
+      element: <Details />
+    },
   ];
 
   

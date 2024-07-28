@@ -1,10 +1,11 @@
 // import { useQuery } from '@tanstack/react-query'
-import {Card} from '../../components/custom/Card'
+// import {Card} from '../../components/custom/Card'
 import { Footer } from '../../components/custom/Footer'
 import { Navbar } from '../../components/custom/Navbar'
 import Product from '../../components/custom/Product'
 // import { getProductList } from '../../api/data/query'
 import Products from '../../api/data/dummy'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
     // const {data } = useQuery({
@@ -24,7 +25,7 @@ export default function Home() {
                 <p className='text-white text-xl w-3/4 leading-normal mt-10 tracking-widest'>
                     To provide you with stable reliable electricity, Let you enjoy unlimited convienience in life
                 </p>
-                <button className='p-5 px-16 w-44 rounded-lg mt-10 text-3xl tracking-wider flex justify-center items-center bg-orange-700 text-white'>Explore</button>
+                <Link to ="/generator" className='p-5 px-16 w-44 rounded-lg mt-10 text-3xl tracking-wider flex justify-center items-center bg-orange-700 text-white'>Explore</Link>
             </div>
         </section>
 
@@ -58,7 +59,7 @@ export default function Home() {
                             Africa is growing fast, but faces power shortages. China's "Belt and Road" initiative aims to help. We're excited to be part of it, bringing our products to support Africa's growth and development       
                         </p>
 
-                        <button className='p-3 text-xl max-w-44 tracking-wider flex justify-center items-center bg-orange-600 text-white'>Learn more</button>
+                        <Link to="/faq" className='p-3 text-xl max-w-44 tracking-wider flex justify-center items-center bg-orange-600 text-white'>Learn more</Link>
 
                           
                     </div>
@@ -232,9 +233,44 @@ export default function Home() {
                 Clients Testimonials
             </h3>
             <div className='w-full grid grid-cols-3 gap-10 mt-10 max-w-[1450px]'>
-                <Card/>
-                <Card/>
-                <Card/>
+                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
+                    <div className="flex items-center gap-3">
+                        <img src="./assets/card3.jpeg" alt="logo" className="w-16 h-16  rounded-full"/>
+                    <div>
+                        <h3 className="text-lg text-orange-500 font-medium">Prof Fredrick Abban</h3>
+                        <p className="text-sm text-gray-500">Deputy Speaker</p>
+                    </div>
+                    </div>
+                    <div className="pt-5">
+                        Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough
+                    </div>
+                </div>
+
+                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
+                    <div className="flex items-center gap-3">
+                        <img src="./assets/card1.jpg" alt="logo" className="w-16 h-16  rounded-full"/>
+                    <div>
+                        <h3 className="text-lg text-orange-500 font-medium">Xia Wanqiu</h3>
+                        <p className="text-sm text-gray-500">Deputy Speaker</p>
+                    </div>
+                    </div>
+                    <div className="pt-5">
+                        Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough
+                    </div>
+                </div>
+
+                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
+                    <div className="flex items-center gap-3">
+                        <img src="./assets/card2.png" alt="logo" className="w-16 h-16  rounded-full"/>
+                    <div>
+                        <h3 className="text-lg text-orange-500 font-medium">Prof Freda Abban</h3>
+                        <p className="text-sm text-gray-500">Deputy Speaker</p>
+                    </div>
+                    </div>
+                    <div className="pt-5">
+                        Long Lian Industry and Trade's products have revolutionized our business. Their generators are incredibly reliable, efficient, and durable. I highly recommend them to everyone.
+                    </div>
+                </div>
             </div>
         </section>
         <Footer/>

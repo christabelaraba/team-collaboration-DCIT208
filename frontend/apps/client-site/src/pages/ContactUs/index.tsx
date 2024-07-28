@@ -26,7 +26,7 @@ export default function ContactUs() {
                         Phone Number
                         </h3>  
                         <p className="text-gray-700 text-sm font-semibold">
-                            +23312341234
+                            +233 53 509 7486
                         </p>
                     </div>
                     
