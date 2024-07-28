@@ -8,7 +8,7 @@ export const Navbar = () => {
         <nav className="w-full py-3 sm:py-4 px-4 sm:px-6 fixed top-0 left-0 right-0 bg-white shadow-md z-50">
             <div className="flex items-center justify-between">
                 <div>
-                    <img src="./assets/logo.png" alt="logo" className="w-28 sm:w-36 md:w-44 lg:w-52"/>
+                    <img src="/assets/logo.png" alt="logo" className="w-28 sm:w-36 md:w-44 lg:w-52"/>
                 </div>
                 <div className="hidden lg:flex flex-col items-end gap-2">
                     <ul className="flex items-center gap-3 lg:gap-4 text-xs">

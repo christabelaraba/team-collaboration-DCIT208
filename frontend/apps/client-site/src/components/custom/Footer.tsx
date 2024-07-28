@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-
 export const Footer = () => {
     return (
       <footer className="w-full flex flex-col bg-[#00072D]">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4 sm:px-6 lg:px-8 py-10">
           <div className="col-span-1 sm:col-span-2 lg:col-span-1">
-            <img src="./assets/logo_white.png" alt="logo_white" className="w-48 sm:w-56 lg:w-64 max-w-full" />
+            <img src="/assets/logo_white.png" alt="logo_white" className="w-48 sm:w-56 lg:w-64 max-w-full" />
           </div>
           
           <div className="w-full">

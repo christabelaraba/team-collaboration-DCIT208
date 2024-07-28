@@ -2,9 +2,16 @@ import {Card} from '../../components/custom/Card'
 import { Footer } from '../../components/custom/Footer'
 import { Navbar } from '../../components/custom/Navbar'
 import Product from '../../components/custom/Product'
-import Products from '../../api/data/dummy'
+import { useQuery } from '@tanstack/react-query'
+import { getProductList } from '../../api/data/query'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
+     const { data } = useQuery({
+        queryKey: ["products"],
+        queryFn: () => getProductList()
+    })
+    const productList = data?.data
     return (
         <main className="pt-14 sm:pt-16 md:pt-18 lg:pt-20">
         <Navbar/>
@@ -15,7 +22,7 @@ export default function Home() {
                 <p className='text-white text-sm sm:text-base md:text-lg lg:text-xl w-full md:w-3/4 leading-normal mt-2 sm:mt-3 md:mt-5 lg:mt-10 tracking-wide sm:tracking-wider'>
                     To provide you with stable reliable electricity, Let you enjoy unlimited convienience in life
                 </p>
-                <button className='p-2 sm:p-3 md:p-4 lg:p-5 px-4 sm:px-6 md:px-8 lg:px-16 w-32 sm:w-36 md:w-40 lg:w-44 rounded-lg mt-3 sm:mt-4 md:mt-5 lg:mt-10 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl tracking-wider flex justify-center items-center bg-orange-700 text-white'>
+                <button className='p-2 sm:p-3  px-4 sm:px-6 md:px-8 lg:px-16 w-32 sm:w-36 md:w-40 lg:w-44 rounded-lg mt-3 sm:mt-4 md:mt-5 lg:mt-10 text-base sm:text-lg md:text-xl lg:text-2xl  tracking-wider flex justify-center items-center bg-orange-700 text-white'>
                     Explore
                 </button>
             </div>
@@ -57,26 +64,20 @@ export default function Home() {
 
         {/* Product */}
         <section className='w-full h-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 md:gap-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-32'>
-            {Products.data.slice(0, 2).map(product => <Product key={product.id} {...product}/>)}
-
+            {productList?.slice(0, 2)?.map(product => <Product key={product.id} {...product}/>)}
             <div className='bg-blue-900 p-4 sm:p-5 mt-6 sm:mt-8 md:mt-10 h-auto sm:h-[90%] md:h-[85%] lg:h-[80%]'>
                 <h3 className='text-white text-lg sm:text-xl'>Top Products</h3>
                 <hr className='bg-gray-400 my-2 sm:my-3 w-10/12'/>
-
+            {productList?.slice(3, 5).map(product => 
+               <Link to={`/generators/details/${product.id}`}>
                 <div className='bg-white h-8 sm:h-10 flex justify-center items-center relative mt-4 sm:mt-5 md:mt-7'>
                     <div className='bg-orange-600 w-1 sm:w-1.5 absolute left-0 h-full'></div>
-                    <p className='text-black text-sm sm:text-base'>High Speed Steel T1/Din 1.3355 Ma...</p>
+                    <p className='text-black text-sm sm:text-base truncate w-11/12'>{product.model} {product.description}</p>
                 </div>
-
-                <div className='bg-white h-8 sm:h-10 flex justify-center items-center relative my-2'>
-                    <div className='bg-orange-600 w-1 sm:w-1.5 absolute left-0 h-full'></div>
-                    <p className='text-black text-sm sm:text-base'>High Speed Steel T1/Din 1.3355 Ma...</p>
-                </div>
-
-                <div className='bg-white h-8 sm:h-10 flex justify-center items-center relative'>
-                    <div className='bg-orange-600 w-1 sm:w-1.5 absolute left-0 h-full'></div>
-                    <p className='text-black text-sm sm:text-base'>High Speed Steel T1/Din 1.3355 Ma...</p>
-                </div>
+               </Link>
+            )}
+                
+                
             </div>
         </section>
 
@@ -166,11 +167,11 @@ export default function Home() {
         </section>
 
         {/* Kpi */}
-        <section className='w-full bg-[url("/assets/kpi.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
-            <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 bg-[#000522BF] p-6 sm:p-8 md:p-10 py-16 sm:py-20 md:py-32 lg:py-44'>
-                <div className="w-full flex flex-col items-center gap-4 sm:gap-5">
-                    <div className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full bg-[#FBECE6] mt-4 sm:mt-5 items-center justify-center flex relative">
-                        <img src="/assets/20-years.png" alt="20 years" className="h-24 w-24 sm:h-28 sm:w-28 md:h-36 md:w-36"/> 
+         <section className='w-full bg-[url("/assets/kpi.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
+            <div className='w-full grid grid-cols-3 gap-10 bg-[#000522BF] p-10 py-40'>
+                <div className="w-full flex flex-col items-center gap-5">
+                    <div className="w-44 h-44 rounded-full bg-[#FBECE6] mt-5 items-center justify-center flex relative">
+                        <img src="/assets/20-years.png" alt="20 years" className="h-36 w-36"/> 
                     </div>
                     <div>
                         <p className="text-base sm:text-lg md:text-xl text-white max-w-60 sm:max-w-80 text-center">Focus on generator set products</p>
@@ -198,14 +199,47 @@ export default function Home() {
         </section>
 
         {/* testimonials */}
-        <section className='w-full flex flex-col items-center p-6 sm:p-8 md:p-10 py-16 sm:py-20 md:py-32 lg:py-44'>
-            <h3 className='text-orange-500 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-wider text-center'>
+        <section className='w-full flex flex-col items-center  p-10 py-44'>
+            <h3 className=' text-orange-500 text-4xl font-semibold tracking-wider'>
                 Clients Testimonials
             </h3>
-            <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 mt-8 sm:mt-10 max-w-[1450px]'>
-                <Card/>
-                <Card/>
-                <Card/>
+            <div className='w-full grid grid-cols-3 gap-10 mt-10 max-w-[1450px]'>
+                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
+                    <div className="flex items-center gap-3">
+                        <img src="./assets/card3.jpeg" alt="logo" className="w-16 h-16  rounded-full"/>
+                    <div>
+                        <h3 className="text-lg text-orange-500 font-medium">Prof Fredrick Abban</h3>
+                        <p className="text-sm text-gray-500">Deputy Speaker</p>
+                    </div>
+                    </div>
+                    <div className="pt-5">
+                        Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough
+                    </div>
+                </div>
+                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
+                    <div className="flex items-center gap-3">
+                        <img src="./assets/card1.jpg" alt="logo" className="w-16 h-16  rounded-full"/>
+                    <div>
+                        <h3 className="text-lg text-orange-500 font-medium">Xia Wanqiu</h3>
+                        <p className="text-sm text-gray-500">Deputy Speaker</p>
+                    </div>
+                    </div>
+                    <div className="pt-5">
+                        Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough
+                    </div>
+                </div>
+                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
+                    <div className="flex items-center gap-3">
+                        <img src="./assets/card2.png" alt="logo" className="w-16 h-16  rounded-full"/>
+                    <div>
+                        <h3 className="text-lg text-orange-500 font-medium">Prof Freda Abban</h3>
+                        <p className="text-sm text-gray-500">Deputy Speaker</p>
+                    </div>
+                    </div>
+                    <div className="pt-5">
+                        Long Lian Industry and Trade's products have revolutionized our business. Their generators are incredibly reliable, efficient, and durable. I highly recommend them to everyone.
+                    </div>
+                </div>
             </div>
         </section>
         <Footer/>
