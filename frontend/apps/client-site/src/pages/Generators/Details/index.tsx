@@ -27,7 +27,13 @@ export default function Details() {
 
             {/* Generator Details */}
             <section className='w-full flex flex-col lg:flex-row items-center justify-between mt-16 sm:mt-20 py-6 sm:py-10 px-4 sm:px-6 md:px-10'>
-                <div className='w-full lg:w-1/2 mb-6 lg:mb-0'>
+                {/* Image - Now appears first on mobile */}
+                <div className='w-full lg:w-1/2 mb-6 lg:mb-0 order-1 lg:order-2'>
+                    <img src={productList.picture_url || "https://res.cloudinary.com/dzgzufiwm/image/upload/v1722091461/Jingdoli/Products/yga000scjqa51yutmyg4.jpg"} alt={productList?.model!} className='w-full h-auto'/>
+                </div>
+                
+                {/* Product Details - Now appears second on mobile */}
+                <div className='w-full lg:w-1/2 mt-6 lg:mt-0 order-2 lg:order-1'>
                     <h2 className='font-bold uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl py-2 sm:py-3'>
                        {productList.prime}
                     </h2>
@@ -54,10 +60,6 @@ export default function Details() {
                         <button onClick={() => openModal('enquiry_modal')} className="w-full sm:w-44 text-lg sm:text-xl h-12 bg-orange-600 text-white rounded uppercase tracking-wider font-semibold">Make Enquiry</button>
                         <button onClick={() => openModal('order_modal')} className="w-full sm:w-44 text-lg sm:text-xl h-12 bg-white text-orange-600 border border-orange-600 rounded uppercase tracking-wider font-semibold">Order Online</button>
                     </div>
-                </div>
-                
-                <div className='w-full lg:w-1/2 mt-6 lg:mt-0'>
-                    <img src={productList.picture_url || "https://res.cloudinary.com/dzgzufiwm/image/upload/v1722091461/Jingdoli/Products/yga000scjqa51yutmyg4.jpg"} alt={productList?.model!} className='w-full h-auto'/>
                 </div>
             </section>
 
