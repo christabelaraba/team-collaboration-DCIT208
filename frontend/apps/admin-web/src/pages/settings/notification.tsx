@@ -31,21 +31,21 @@ export function Notifications() {
     },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // })
-  }
+//   function onSubmit(data: z.infer<typeof FormSchema>) {
+//     // toast({
+//     //   title: "You submitted the following values:",
+//     //   description: (
+//     //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+//     //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+//     //     </pre>
+//     //   ),
+//     // })
+//   }
 
   return (
     
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
+      <form className="w-full space-y-6">
         <div>
             <PageHead title="Notifications | App" />
         <div className="flex items-center justify-between space-y-2 px-5">
