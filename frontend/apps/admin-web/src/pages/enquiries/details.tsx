@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import PageHead from "@/components/custom/page-head"
-
+import { useParams } from "react-router-dom"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -21,8 +21,15 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import { useQuery } from "@tanstack/react-query"
+import { getEnquiry } from "@/api/data/query"
 export default function EnquiryDetails() {
-
+  const {id} = useParams()
+  const {data: enquiry} = useQuery({
+     queryKey: ["enquiry"],
+    queryFn: () => getEnquiry(id as string),
+  })
+  console.log((enquiry?.data as any)?.data)
   const [isOpened,setIsOpened] = useState(false); 
   return (
     <>
@@ -67,26 +74,26 @@ export default function EnquiryDetails() {
           <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-3">
               <Label htmlFor="first_name">First Name:</Label>
-              <Input id="first_name" type="text" placeholder="Enter first name" className="rounded" />
+              <Input id="first_name" type="text" disabled value={(enquiry?.data as any)?.data?.customer_name.split(" ")[0]} placeholder="Enter first name" className="rounded" />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="last_name">Last Name:</Label>
-              <Input id="last_name" type="text" placeholder="Enter last name" className="rounded" />
+              <Input id="last_name" type="text" disabled value={(enquiry?.data as any)?.data?.customer_name.split(" ")[1]} placeholder="Enter last name" className="rounded" />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-3">
               <Label htmlFor="email">Email:</Label>
-              <Input id="email" type="email" placeholder="Enter email" className="rounded" />
+              <Input id="email" type="email" disabled value={(enquiry?.data as any)?.data?.email} placeholder="Enter email" className="rounded" />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="phone">Phone Number:</Label>
-              <Input id="phone" type="tel" placeholder="Enter phone number" className="rounded" />
+              <Input id="phone" type="tel" disabled value={(enquiry?.data as any)?.data?.phone_number} placeholder="Enter phone number" className="rounded" />
             </div>
           </div>
      <div className="grid gap-3">
             <Label htmlFor="message">Message:</Label>
-            <Textarea id="message" className="rounded" placeholder="Enter message" rows={5} />
+            <Textarea id="message" disabled value={(enquiry?.data as any)?.data?.message} className="rounded" placeholder="Enter message" rows={5} />
           </div>
           <Button type="submit" onClick={(e) => {
             e.preventDefault()

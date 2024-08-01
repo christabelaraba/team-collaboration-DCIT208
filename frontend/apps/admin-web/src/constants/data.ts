@@ -15,14 +15,24 @@ export const navItems: NavItem[] = [
   },
   {
     title: 'Orders',
-    href: '/login',
+    href: '/orders',
     icon: 'orders',
     label: 'Orders'
   },{
     title: 'Report',
-    href: '/login',
+    href: '/report',
     icon: 'report',
     label: 'Report'
+  },{
+    title: 'Generators',
+    href: '/generators',
+    icon: 'generators',
+    label: 'Generators'
+  },{
+    title: 'Settings',
+    href: '/settings',
+    icon: 'settings',
+    label: 'Settings'
   }
 ];
 
