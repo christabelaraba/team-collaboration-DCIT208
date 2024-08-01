@@ -1,5 +1,5 @@
 import { api } from "../client"
-import { AuthSchema } from "../schema"
+// import { AuthSchema } from "../schema"
 
 interface AddProductsProps {
   model: string,

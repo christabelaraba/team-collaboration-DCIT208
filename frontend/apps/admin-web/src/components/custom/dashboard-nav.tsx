@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { Dispatch, SetStateAction } from 'react';
 import { NavLink } from 'react-router-dom';
 import { NavItem } from '@/types';
-import { Icons } from '../ui/icons';
+// import { Icons } from '../ui/icons';
 
 type DashboardNavProps = {
   items: NavItem[];
