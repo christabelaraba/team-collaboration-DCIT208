@@ -5,16 +5,9 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form"
-import { Switch } from "@/components/ui/switch"
+
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
-import { Link } from "react-router-dom"
+import { Form, Link } from "react-router-dom"
 import { Tabs, TabsContent } from "@radix-ui/react-tabs"
 import { Card, CardContent } from "@/components/ui/card"
 // import { toast } from "@/components/ui/use-toast"
@@ -32,15 +25,20 @@ export function Security() {
     },
   })
 
+  // function onSubmit(data: z.infer<typeof FormSchema>) {
+  //   // toast({
+  //   //   title: "You submitted the following values:",
+  //   //   description: (
+  //   //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+  //   //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+  //   //     </pre>
+  //   //   ),
+  //   // })
+  // }
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // })
+    console.log('Form data:', data);
+    // onSubmit(data, { method: 'post' }); // Use the submit function to handle form submission
   }
 
   return (

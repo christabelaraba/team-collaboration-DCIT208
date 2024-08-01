@@ -12,7 +12,7 @@ import General from '@/pages/settings/general';
 import { Notifications } from '@/pages/settings/notification';
 import ChangePassword from '@/pages/settings/security/change-password';
 import { Security } from '@/pages/settings/security/security';
-import path from 'path';
+// import path from 'path';
 import { Suspense, lazy } from 'react';
 import { Navigate, Outlet, useRoutes } from 'react-router-dom';
 

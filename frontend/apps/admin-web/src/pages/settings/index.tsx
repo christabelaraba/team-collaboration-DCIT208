@@ -1,16 +1,16 @@
 "use client"
 
 
-import { Label } from "@/components/ui/label"
+// import { Label } from "@/components/ui/label"
 import PageHead from "@/components/custom/page-head"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+// import {
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableHead,
+//   TableHeader,
+//   TableRow,
+// } from "@/components/ui/table"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -24,62 +24,62 @@ import {
   TabsContent, 
 } from '@/components/ui/tabs';
 import { Card, CardContent } from "@/components/ui/card"
-import { addDays, format } from "date-fns"
-import React from "react"
-import { DateRange } from "react-day-picker"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
+// import { addDays, format } from "date-fns"
+// import React from "react"
+// import { DateRange } from "react-day-picker"
+// import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-]
+// const invoices = [
+//   {
+//     invoice: "INV001",
+//     paymentStatus: "Paid",
+//     totalAmount: "$250.00",
+//     paymentMethod: "Credit Card",
+//   },
+//   {
+//     invoice: "INV002",
+//     paymentStatus: "Pending",
+//     totalAmount: "$150.00",
+//     paymentMethod: "PayPal",
+//   },
+//   {
+//     invoice: "INV003",
+//     paymentStatus: "Unpaid",
+//     totalAmount: "$350.00",
+//     paymentMethod: "Bank Transfer",
+//   },
+//   {
+//     invoice: "INV004",
+//     paymentStatus: "Paid",
+//     totalAmount: "$450.00",
+//     paymentMethod: "Credit Card",
+//   },
+//   {
+//     invoice: "INV005",
+//     paymentStatus: "Paid",
+//     totalAmount: "$550.00",
+//     paymentMethod: "PayPal",
+//   },
+//   {
+//     invoice: "INV006",
+//     paymentStatus: "Pending",
+//     totalAmount: "$200.00",
+//     paymentMethod: "Bank Transfer",
+//   },
+//   {
+//     invoice: "INV007",
+//     paymentStatus: "Unpaid",
+//     totalAmount: "$300.00",
+//     paymentMethod: "Credit Card",
+//   },
+// ]
 
 export default function Settings() {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-  from: new Date(2022, 0, 20),
-  to: addDays(new Date(2022, 0, 20), 20),
-  })
+  // const [date, setDate] = React.useState<DateRange | undefined>({
+  // from: new Date(2022, 0, 20),
+  // to: addDays(new Date(2022, 0, 20), 20),
+  // })
 
   return (
   <>
