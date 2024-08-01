@@ -7,7 +7,8 @@ import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import ThemeProvider from './theme-provider';
-
+ import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 export const queryClient = new QueryClient();
 
 const ErrorFallback = ({ error }: FallbackProps) => {
@@ -19,7 +20,7 @@ const ErrorFallback = ({ error }: FallbackProps) => {
       role="alert"
     >
       <h2 className="text-2xl font-semibold">
-        Ooops, something went wrong :{' '}
+        Ooops, something went wrong :({' '}
       </h2>
       <pre className="text-2xl font-bold">{error.message}</pre>
       <pre>{error.stack}</pre>
@@ -44,6 +45,7 @@ export default function AppProvider({
               <ReactQueryDevtools />
               <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
                 {children}
+                <ToastContainer />
               </ThemeProvider>
             </QueryClientProvider>
           </ErrorBoundary>

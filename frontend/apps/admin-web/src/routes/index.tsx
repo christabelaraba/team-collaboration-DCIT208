@@ -1,8 +1,18 @@
 import AllQuote from '@/pages/dashboard/all-quote';
+import GenerateReport from '@/pages/dashboard/generate-report';
 import NewQuote from '@/pages/dashboard/new-quote';
 import EnquiryPage from '@/pages/enquiries';
 import EnquiryDetails from '@/pages/enquiries/details';
+import Generators from '@/pages/generators';
 import NotFound from '@/pages/not-found';
+import Orders from '@/pages/orders';
+import Report from '@/pages/report';
+import Settings from '@/pages/settings';
+import General from '@/pages/settings/general';
+import { Notifications } from '@/pages/settings/notification';
+import ChangePassword from '@/pages/settings/security/change-password';
+import { Security } from '@/pages/settings/security/security';
+import path from 'path';
 import { Suspense, lazy } from 'react';
 import { Navigate, Outlet, useRoutes } from 'react-router-dom';
 
@@ -11,10 +21,6 @@ const DashboardLayout = lazy(
 );
 const LoginPage = lazy(() => import('@/pages/auth/login'));
 const DashboardPage = lazy(() => import('@/pages/dashboard'));
-// const StudentPage = lazy(() => import('@/pages/students'));
-// const StudentDetailPage = lazy(
-//   () => import('@/pages/students/StudentDetailPage')
-// );
 
 // ----------------------------------------------------------------------
 
@@ -49,6 +55,43 @@ export default function AppRouter() {
         {
           path: 'all-quote',
           element: <AllQuote />
+        },
+        {
+          path: 'generate',
+          element: <GenerateReport />
+        },
+         {
+          path: 'orders',
+          element: <Orders />
+        },
+         {
+          path: 'generators',
+          element: <Generators/>
+        },
+          {
+          path: 'report',
+          element: <Report/>
+        },{
+          path: 'settings',
+          element: <Settings />
+        },{
+          path: '/settings/profile',
+          element: <Settings />
+        },{
+          path: '/settings/general',
+          element: <General />
+        },
+        {
+          path: '/settings/notification',
+          element: <Notifications/>
+        },
+        {
+          path: '/settings/security',
+          element: <Security/>
+        },
+        {
+          path: '/settings/security/change-password',
+          element: <ChangePassword/>
         }
       ]
     }

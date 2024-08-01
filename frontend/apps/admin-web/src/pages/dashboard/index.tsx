@@ -1,5 +1,4 @@
 import PageHead from '@/components/custom/page-head';
-import { RecentSales } from '@/components/custom/recent-sales';
 import {
   Card,
   CardContent,
@@ -12,10 +11,34 @@ import {
   TabsContent,
  
 } from '@/components/ui/tabs';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { Link } from 'react-router-dom';
-
-
+import React from 'react';
+import Cookies from 'js-cookie';
+import { useRouter } from '@/routes/hooks';
+import { useQuery } from '@tanstack/react-query';
+import { getOrders } from '@/api/data/query';
+import moment from 'moment';
 export default function DashboardPage() {
+  const user = Cookies.get('user')
+  const router = useRouter()
+  React.useEffect(() => {
+    if(!user){
+       router.push('/login')
+    }
+  }, [])
+
+   const {data: orders} = useQuery({
+    queryFn: getOrders,
+    queryKey: ['orders']
+  })
   return (
     <>
       <PageHead title="Dashboard | App" />
@@ -110,7 +133,7 @@ export default function DashboardPage() {
               </Card>
               <Card className=""> 
                 <CardContent className="w-full p-0 h-20 flex items-center justify-center">
-                 <Link to="" className='text-xl tracking-wider font-semibold'>Generate Report</Link>
+                 <Link to="generate" className='text-xl tracking-wider font-semibold'>Generate Report</Link>
                 </CardContent>
               </Card>
               {/* <Card className="col-span-4">
@@ -136,11 +159,32 @@ export default function DashboardPage() {
             </div>
             <Card className="col-span-4 md:col-span-3">
                 <CardHeader>
-                  <CardTitle className='text-2xl'>Recent Orders</CardTitle>
-                 
+                  <CardTitle className='text-2xl'>Recent Orders</CardTitle>   
                 </CardHeader>
                 <CardContent>
-                  <RecentSales />
+                 <Table>
+                  <TableHeader>
+                    <TableRow className="border-t">
+                      <TableHead className="text-gray-400">ID</TableHead>
+                      <TableHead className="text-gray-400">Date</TableHead>
+                      <TableHead className="text-gray-400">Name</TableHead>
+                      <TableHead className="text-gray-400">Phone Number</TableHead>
+                      <TableHead className="text-gray-400">Message</TableHead>
+                      {/* <TableHead className="text-gray-400">Status</TableHead> */}
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody >
+                    {(orders?.data as any)?.data?.map((order: any) => (
+                      <TableRow key={order.id} className="border-none ">
+                        <TableCell >{order.id}</TableCell>
+                        <TableCell className="font-medium">{moment(order.createdAt).format("DD-MM-YYYY")}</TableCell>
+                        <TableCell>{`${order.first_name} ${order.last_name}`}</TableCell>
+                        <TableCell>{order.phone_number}</TableCell>
+                        <TableCell >{order.message}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody> 
+                </Table>
                 </CardContent>
               </Card>
           </TabsContent>
