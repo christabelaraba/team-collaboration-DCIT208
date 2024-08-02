@@ -1,4 +1,4 @@
-import PageHead from '@/components/custom/page-head';
+       import PageHead from '@/components/custom/page-head';
 import {
   Table,
   TableBody,
@@ -72,7 +72,7 @@ export default function EnquiryPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody >
-                      {(enquiries?.data as any)?.data.map((enquiry: any) => (
+                      {(enquiries?.data as any)?.data?.map((enquiry: any) => (
                         <TableRow key={enquiry.id} className="border-none ">
                           <TableCell className="font-medium">{enquiry.id}</TableCell>
                           <TableCell>{moment(enquiry.created_at).format('MMMM Do YYYY')}</TableCell>
