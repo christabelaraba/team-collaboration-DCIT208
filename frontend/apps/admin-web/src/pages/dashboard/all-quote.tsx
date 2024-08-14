@@ -177,7 +177,7 @@ export default function AllQuote() {
         <TableRow className="border-t">
           <TableHead className="text-gray-400">ID</TableHead>
           <TableHead className="text-gray-400">Date</TableHead>
-          <TableHead className="text-gray-400">Name</TableHead>
+          <TableHead className="text-gray-400">Price</TableHead>
           <TableHead className="text-gray-400">Message</TableHead>
           <TableHead className="text-gray-400">Status</TableHead>
         </TableRow>

@@ -30,24 +30,19 @@ export default function Login({ className, ...props }: UserAuthFormProps) {
     mutationFn: LoginFunc,
   })
 
-//   response_code
-// : 
-// "012"
-// response_message
-// : 
-// "Login successful"
   
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
     setIsLoading(true) 
     const res = await loginMutation.mutateAsync(data)
     if ((res.data as any).response_code === "012"){
+      Cookies.set('token', (res.data as any).accessToken)
       Cookies.set('user', JSON.stringify((res.data as any).data))
-      toast.success("User successfully logged in")
+      toast.success((res.data as any).response_message)
       router.push('/')
 
     }else{
-      toast.error("Login details incorrect, Try again")
+      toast.error((res.data as any).response_message || "Login details incorrect, Try again")
     }    
     setIsLoading(false)
   }

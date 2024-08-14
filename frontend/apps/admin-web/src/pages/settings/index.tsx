@@ -1,16 +1,16 @@
 "use client"
 
 
-// import { Label } from "@/components/ui/label"
+import { Label } from "@/components/ui/label"
 import PageHead from "@/components/custom/page-head"
-// import {
-//   Table,
-//   TableBody,
-//   TableCell,
-//   TableHead,
-//   TableHeader,
-//   TableRow,
-// } from "@/components/ui/table"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -24,66 +24,66 @@ import {
   TabsContent, 
 } from '@/components/ui/tabs';
 import { Card, CardContent } from "@/components/ui/card"
-// import { addDays, format } from "date-fns"
-// import React from "react"
-// import { DateRange } from "react-day-picker"
-// import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { addDays, format } from "date-fns"
+import React from "react"
+import { DateRange } from "react-day-picker"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 
-// const invoices = [
-//   {
-//     invoice: "INV001",
-//     paymentStatus: "Paid",
-//     totalAmount: "$250.00",
-//     paymentMethod: "Credit Card",
-//   },
-//   {
-//     invoice: "INV002",
-//     paymentStatus: "Pending",
-//     totalAmount: "$150.00",
-//     paymentMethod: "PayPal",
-//   },
-//   {
-//     invoice: "INV003",
-//     paymentStatus: "Unpaid",
-//     totalAmount: "$350.00",
-//     paymentMethod: "Bank Transfer",
-//   },
-//   {
-//     invoice: "INV004",
-//     paymentStatus: "Paid",
-//     totalAmount: "$450.00",
-//     paymentMethod: "Credit Card",
-//   },
-//   {
-//     invoice: "INV005",
-//     paymentStatus: "Paid",
-//     totalAmount: "$550.00",
-//     paymentMethod: "PayPal",
-//   },
-//   {
-//     invoice: "INV006",
-//     paymentStatus: "Pending",
-//     totalAmount: "$200.00",
-//     paymentMethod: "Bank Transfer",
-//   },
-//   {
-//     invoice: "INV007",
-//     paymentStatus: "Unpaid",
-//     totalAmount: "$300.00",
-//     paymentMethod: "Credit Card",
-//   },
-// ]
+const invoices = [
+  {
+    invoice: "INV001",
+    paymentStatus: "Paid",
+    totalAmount: "$250.00",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV002",
+    paymentStatus: "Pending",
+    totalAmount: "$150.00",
+    paymentMethod: "PayPal",
+  },
+  {
+    invoice: "INV003",
+    paymentStatus: "Unpaid",
+    totalAmount: "$350.00",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV004",
+    paymentStatus: "Paid",
+    totalAmount: "$450.00",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV005",
+    paymentStatus: "Paid",
+    totalAmount: "$550.00",
+    paymentMethod: "PayPal",
+  },
+  {
+    invoice: "INV006",
+    paymentStatus: "Pending",
+    totalAmount: "$200.00",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV007",
+    paymentStatus: "Unpaid",
+    totalAmount: "$300.00",
+    paymentMethod: "Credit Card",
+  },
+]
 
 export default function Settings() {
-  // const [date, setDate] = React.useState<DateRange | undefined>({
-  // from: new Date(2022, 0, 20),
-  // to: addDays(new Date(2022, 0, 20), 20),
-  // })
+  const [date, setDate] = React.useState<DateRange | undefined>({
+  from: new Date(2022, 0, 20),
+  to: addDays(new Date(2022, 0, 20), 20),
+  })
 
   return (
   <>
-    <PageHead title="Settings | App" />
+    <PageHead title="Dashboard | App" />
     <div className="flex-1 min-h-screen space-y-4 p-4 pt-6 md:p-8 bg-gray-100">
       <div className="flex items-center justify-between space-y-2">
         <h2 className="text-3xl font-bold tracking-tight">
@@ -115,7 +115,7 @@ export default function Settings() {
                       <path d="M5.83398 26.2513C5.83398 24.7042 6.44857 23.2205 7.54253 22.1265C8.63649 21.0326 10.1202 20.418 11.6673 20.418H23.334C24.8811 20.418 26.3648 21.0326 27.4588 22.1265C28.5527 23.2205 29.1673 24.7042 29.1673 26.2513C29.1673 27.0249 28.86 27.7667 28.313 28.3137C27.7661 28.8607 27.0242 29.168 26.2507 29.168H8.75065C7.9771 29.168 7.23524 28.8607 6.68826 28.3137C6.14128 27.7667 5.83398 27.0249 5.83398 26.2513Z" stroke="#131C40" stroke-width="2.5" stroke-linejoin="round"/>
                       <path d="M17.5 14.584C19.9162 14.584 21.875 12.6252 21.875 10.209C21.875 7.79274 19.9162 5.83398 17.5 5.83398C15.0838 5.83398 13.125 7.79274 13.125 10.209C13.125 12.6252 15.0838 14.584 17.5 14.584Z" stroke="#131C40" stroke-width="2.5"/>
                     </svg>
-                    <Link to="/settings/profile" className="hover:text-orange-500">Profile Settings</Link>
+                    <Link to="/settings/profile">Profile Settings</Link>
                   </div>
                   <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1809_624)">
@@ -140,7 +140,7 @@ export default function Settings() {
                       <path d="M28.9844 9.14445C29.4851 9.43008 29.9009 9.84366 30.1891 10.3428C30.4774 10.842 30.6278 11.4089 30.625 11.9853V22.6078C30.625 23.7876 29.979 24.8755 28.9362 25.4486L19.0925 31.6757C18.6044 31.9435 18.0567 32.0839 17.5 32.0839C16.9433 32.0839 16.3956 31.9435 15.9075 31.6757L6.06375 25.4486C5.55408 25.1692 5.12861 24.7583 4.83161 24.2587C4.53461 23.7591 4.37694 23.189 4.375 22.6078V11.9838C4.375 10.804 5.02104 9.71758 6.06375 9.14445L15.9075 3.34029C16.4099 3.06326 16.9744 2.91797 17.5481 2.91797C18.1219 2.91797 18.6863 3.06326 19.1887 3.34029L29.0325 9.14445H28.9844Z" stroke="#131C40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                       <path d="M13.125 17.5C13.125 18.6603 13.5859 19.7731 14.4064 20.5936C15.2269 21.4141 16.3397 21.875 17.5 21.875C18.6603 21.875 19.7731 21.4141 20.5936 20.5936C21.4141 19.7731 21.875 18.6603 21.875 17.5C21.875 16.3397 21.4141 15.2269 20.5936 14.4064C19.7731 13.5859 18.6603 13.125 17.5 13.125C16.3397 13.125 15.2269 13.5859 14.4064 14.4064C13.5859 15.2269 13.125 16.3397 13.125 17.5Z" stroke="#131C40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <Link to="/settings/general" className="hover:text-orange-500">General Settings</Link>
+                    <Link to="/settings/general">General Settings</Link>
                   </div>
                   <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1809_624)">
@@ -171,7 +171,7 @@ export default function Settings() {
                       </clipPath>
                       </defs>
                     </svg>
-                    <Link to="/settings/notification" className="hover:text-orange-500">Notification Settings</Link>
+                    <Link to="/settings/notification">Notification Settings</Link>
                   </div>
                   <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1809_624)">
@@ -197,7 +197,7 @@ export default function Settings() {
                       <path d="M15.7653 21.875H9.84375V15.9534L16.4391 9.35813C16.4168 9.15619 16.4059 8.95316 16.4062 8.75C16.4062 7.45206 16.7911 6.18327 17.5122 5.10407C18.2333 4.02488 19.2582 3.18374 20.4574 2.68704C21.6565 2.19034 22.976 2.06038 24.249 2.3136C25.522 2.56682 26.6914 3.19183 27.6091 4.10961C28.5269 5.0274 29.1519 6.19672 29.4052 7.46972C29.6584 8.74272 29.5284 10.0622 29.0317 11.2614C28.535 12.4605 27.6939 13.4854 26.6147 14.2065C25.5355 14.9276 24.2667 15.3125 22.9688 15.3125C22.7656 15.3129 22.5626 15.3019 22.3606 15.2797L15.7653 21.875ZM12.0312 19.6875H14.8597L21.6081 12.9391L22.1747 13.043C22.4363 13.0945 22.7021 13.1219 22.9688 13.125C23.8835 13.1363 24.7794 12.864 25.5332 12.3456C26.2871 11.8272 26.8619 11.0881 27.1788 10.2299C27.4956 9.37166 27.539 8.43636 27.3029 7.55248C27.0668 6.6686 26.5628 5.87951 25.8602 5.29359C25.1575 4.70768 24.2907 4.35369 23.3788 4.28026C22.4669 4.20682 21.5546 4.41754 20.7673 4.88347C19.9799 5.34939 19.3562 6.04767 18.9817 6.88238C18.6072 7.71709 18.5003 8.64727 18.6758 9.54516L18.7797 10.1106L12.0312 16.8591V19.6875ZM30.625 21.875H20.7812V24.0625H30.625V30.625H4.375V24.0625H6.5625V21.875H4.375C3.79484 21.875 3.23844 22.1055 2.8282 22.5157C2.41797 22.9259 2.1875 23.4823 2.1875 24.0625V30.625C2.1875 31.2052 2.41797 31.7616 2.8282 32.1718C3.23844 32.582 3.79484 32.8125 4.375 32.8125H30.625C31.2052 32.8125 31.7616 32.582 32.1718 32.1718C32.582 31.7616 32.8125 31.2052 32.8125 30.625V24.0625C32.8125 23.4823 32.582 22.9259 32.1718 22.5157C31.7616 22.1055 31.2052 21.875 30.625 21.875Z" fill="#131C40"/>
                       <path d="M7.65625 28.4375C8.26031 28.4375 8.75 27.9478 8.75 27.3438C8.75 26.7397 8.26031 26.25 7.65625 26.25C7.05219 26.25 6.5625 26.7397 6.5625 27.3438C6.5625 27.9478 7.05219 28.4375 7.65625 28.4375Z" fill="#131C40"/>
                     </svg>
-                    <Link to="/settings/security" className="hover:text-orange-500">Security Settings</Link>
+                    <Link to="/settings/security">Security Settings</Link>
                   </div>
                   <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1809_624)">
@@ -228,7 +228,7 @@ export default function Settings() {
                       </clipPath>
                       </defs>
                     </svg>
-                    <Link to="/settings/admin" className="hover:text-orange-500">Admin Management</Link>
+                    <Link to="/settings/admin">Admin Management</Link>
                   </div>
                   <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1809_624)">
@@ -252,7 +252,7 @@ export default function Settings() {
                     <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M17.4264 26.2494C17.9369 26.2494 18.3685 26.0729 18.7214 25.72C19.0744 25.3671 19.2503 24.9359 19.2493 24.4264C19.2484 23.917 19.0724 23.4853 18.7214 23.1314C18.3705 22.7775 17.9388 22.6016 17.4264 22.6035C16.9141 22.6055 16.4829 22.7819 16.1329 23.1329C15.7829 23.4839 15.6064 23.915 15.6035 24.4264C15.6006 24.9378 15.7771 25.3695 16.1329 25.7214C16.4887 26.0734 16.9199 26.2494 17.4264 26.2494ZM16.1139 20.6348H18.8119C18.8119 19.8327 18.9032 19.2007 19.086 18.7389C19.2688 18.2771 19.785 17.6452 20.6348 16.8431C21.2667 16.2112 21.765 15.6094 22.1296 15.0377C22.4941 14.466 22.6764 13.7796 22.6764 12.9785C22.6764 11.6174 22.1782 10.5723 21.1816 9.84311C20.1851 9.11394 19.0063 8.74936 17.6452 8.74936C16.2598 8.74936 15.1359 9.11394 14.2735 9.84311C13.4112 10.5723 12.8094 11.4473 12.4681 12.4681L14.8744 13.416C14.9959 12.9785 15.2696 12.5046 15.6954 11.9941C16.1212 11.4837 16.7712 11.2285 17.6452 11.2285C18.423 11.2285 19.0063 11.4414 19.3952 11.8673C19.7841 12.2931 19.9785 12.7607 19.9785 13.2702C19.9785 13.7563 19.8327 14.2123 19.541 14.6381C19.2493 15.0639 18.8848 15.4587 18.4473 15.8223C17.3778 16.7702 16.7216 17.4872 16.4785 17.9733C16.2355 18.4594 16.1139 19.3466 16.1139 20.6348ZM17.4994 32.0827C15.482 32.0827 13.5862 31.7001 11.8119 30.935C10.0375 30.1698 8.49414 29.1305 7.18164 27.8171C5.86914 26.5036 4.83032 24.9602 4.06518 23.1869C3.30005 21.4135 2.91699 19.5177 2.91602 17.4994C2.91505 15.481 3.2981 13.5852 4.06518 11.8119C4.83227 10.0385 5.87109 8.49512 7.18164 7.18165C8.4922 5.86818 10.0356 4.82936 11.8119 4.06519C13.5881 3.30102 15.4839 2.91797 17.4994 2.91602C19.5148 2.91408 21.4106 3.29713 23.1868 4.06519C24.9631 4.83325 26.5065 5.87206 27.8171 7.18165C29.1276 8.49123 30.1669 10.0346 30.935 11.8119C31.703 13.5891 32.0856 15.4849 32.0827 17.4994C32.0798 19.5138 31.6967 21.4096 30.9335 23.1869C30.1703 24.9641 29.1315 26.5075 27.8171 27.8171C26.5026 29.1266 24.9592 30.166 23.1868 30.935C21.4145 31.704 19.5187 32.0866 17.4994 32.0827ZM17.4994 29.166C20.7563 29.166 23.515 28.0358 25.7754 25.7754C28.0358 23.515 29.166 20.7563 29.166 17.4994C29.166 14.2424 28.0358 11.4837 25.7754 9.22331C23.515 6.9629 20.7563 5.83269 17.4994 5.83269C14.2424 5.83269 11.4837 6.9629 9.22331 9.22331C6.96289 11.4837 5.83268 14.2424 5.83268 17.4994C5.83268 20.7563 6.96289 23.515 9.22331 25.7754C11.4837 28.0358 14.2424 29.166 17.4994 29.166Z" fill="#131C40"/>
                     </svg>
-                    <Link to="/settings/help" className="hover:text-orange-500">Help and Support</Link>
+                    <Link to="/settings/help">Help and Support</Link>
                   </div>
                   <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1809_624)">
