@@ -1,5 +1,5 @@
-import { api } from "../client"
-// import { AuthSchema } from "../schema"
+import apiClient from "../client";
+import { AuthSchema } from "../schema"
 
 interface AddProductsProps {
   model: string,
@@ -22,11 +22,21 @@ interface AddProductsProps {
 }
 
 export const LoginFunc = async ({ email, password }: { email: string; password: string }) => {
-   const res = await api.post('/admin/login', { email, password })
+   const res = await apiClient.post('/admin/login', { email, password })
    return res
 }
 
 export const AddProducts = async (data: AddProductsProps) => {
-   const res = await api.post('/admin/create_product', data)
+   const res = await apiClient.post('/admin/create_product', data)
+   return res
+}
+
+export const createQuotes = async (data: any) => {
+	const res = await apiClient.post('/admin/create_quote', data)
+	return res
+}
+
+export const respondToEnquiry = async (data: any) => {
+   const res = await apiClient.post('/admin/reply_enquiry', data)
    return res
 }

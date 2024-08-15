@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-// import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea"
 import PageHead from "@/components/custom/page-head"
 
 import {
@@ -32,7 +32,7 @@ import { Button } from "@/components/ui/button"
 export default function General() {
   return (
     <>
-      <PageHead title="General | App" />
+      <PageHead title="Dashboard | App" />
       <div className="flex-1 min-h-screen space-y-4 p-4 pt-6 md:p-8 bg-gray-100">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
@@ -125,9 +125,7 @@ export default function General() {
            
             <div className="flex items-center ">
             <Button type="submit" className="w-56 text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-600 mx-auto uppercase tracking-wider">SAVE CHANGES</Button>
-            <Link to='/settings'>
-          <Button type="submit" className="w-32 text-xl h-12 border-orange-600 text-orange-600 border rounded hover:border-orange-600 mx-auto uppercase tracking-wider">back</Button>
-          </Link>
+          <Button type="submit" className="w-32 text-xl h-12 border-orange-600 text-orange-600 border rounded hover:border-orange-600 mx-auto uppercase tracking-wider">CANCEL</Button>
           </div>
       </form>
     </div>

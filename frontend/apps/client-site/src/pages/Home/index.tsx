@@ -4,244 +4,304 @@ import Product from '../../components/custom/Product'
 import { useQuery } from '@tanstack/react-query'
 import { getProductList } from '../../api/data/query'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useElementOnScreen } from '../../hooks/useElementOnScreen'
+import { useState } from 'react'
+import { ProductType } from '../../api/schema'
 
 export default function Home() {
-    const { data } = useQuery({
-        queryKey: ["products"],
-        queryFn: () => getProductList()
-    })
-    const productList = (data as any)?.data
+	const { t } = useTranslation()
+	const [startFirstAnimation, setStartFirstAnimation] = useState(false);
+	const [startSecondAnimation, setstartSecondAnimation] = useState(false)
+	const [startThirdAnimation, setStartThirdAnimation] = useState(false)
 
-    return (
-        <main className="pt-14 sm:pt-16 md:pt-18 lg:pt-20">
-            <Navbar />
-            <section className='w-full h-[60vh] sm:h-[70vh] md:h-[80vh] bg-[url("/assets/hero.jpg")] bg-no-repeat bg-cover bg-center'>
-                <div className='w-full md:w-10/12 lg:w-8/12 h-full bg-[#000522BF] clip flex flex-col px-4 sm:px-6 md:px-10 gap-3 sm:gap-4 md:gap-5 justify-center'>
-                    <h3 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium w-full md:w-3/4 leading-tight tracking-wider text-white'>
-                        Powering Your World with Reliable <span className='text-orange-500'>Generators</span>
-                    </h3>
-                    <p className='text-white text-sm sm:text-base md:text-lg lg:text-xl w-full md:w-3/4 leading-normal mt-2 sm:mt-3 md:mt-5 lg:mt-10 tracking-wide sm:tracking-wider'>
-                        To provide you with stable reliable electricity, Let you enjoy unlimited convenience in life
-                    </p>
-                    <Link to="/generator" className='p-2 sm:p-3 px-4 sm:px-6 md:px-8 lg:px-16 w-32 sm:w-36 md:w-40 lg:w-44 rounded-lg mt-3 sm:mt-4 md:mt-5 lg:mt-10 text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider flex justify-center items-center bg-orange-700 text-white'>
-                        Explore
-                    </Link>
-                </div>
-            </section>
+	const elementOne = useElementOnScreen({
+		root: null, 
+		rootMargin: '0px',
+		treshold: 1.0
+	}, () => {
+		if (!startFirstAnimation) setStartFirstAnimation(true)
+	});
 
-            {/* About */}
-            <section className='w-full grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 py-12 sm:py-16 md:py-20 lg:py-32 xl:py-52 bg-[url("/assets/about-bg.png")] bg-cover bg-no-repeat bg-center px-4 sm:px-6 md:px-10 lg:px-16'>
-                <div className='w-full flex justify-center lg:justify-end relative'>
-                    <img src='/assets/about-img-02.jpg' alt='about-page' className='w-full sm:w-4/5 md:w-3/4 lg:w-[561px] h-[250px] sm:h-[300px] md:h-[350px] lg:h-[452px] object-cover object-center'/>
-                    <img src='/assets/about-img-01.jpg' alt='about-page' className='hidden lg:block w-[561px] h-[452px] object-cover object-center absolute top-16 -left-10 xl:left-0'/>
-                </div>
+	const elementTwo = useElementOnScreen({
+		root: null,
+		rootMargin: '0px',
+		treshold: 1.0
+	}, () => {
+		if (!startSecondAnimation) setstartSecondAnimation(true)
+	});
 
-                <div className='w-full lg:w-11/12 xl:w-9/12 flex flex-col relative mt-6 lg:mt-0 lg:ml-10 xl:ml-32 [&>p]:mb-4 sm:[&>p]:mb-5 md:[&>p]:mb-6 lg:[&>p]:mb-7'>
-                    <h3 className='text-orange-500 text-lg sm:text-xl font-semibold'>
-                        About
-                    </h3>
-                    
-                    <h3 className="text-xl sm:text-2xl md:text-3xl text-navy-500 font-medium py-2 sm:py-3">
-                        Know More About Jingdoli
-                    </h3>
+	const elementThree = useElementOnScreen({
+		root: null,
+		rootMargin: '0px',
+		treshold: 1.0
+	}, () => {
+		if (!startThirdAnimation) setStartThirdAnimation(true)
+	});
 
-                    <p className="text-sm sm:text-base md:text-lg">
-                        Jingdoli Industry and Trade Co., Ltd, specializes in diesel generator sets, prioritizing humanized design, professional production, and reliable support. Our generators are compact, efficient, and quiet, ideal for main and backup power. We partner with top companies and serve customers worldwide.
-                    </p>
+	const { data, isLoading } = useQuery({
+		queryKey: ['products'],
+		queryFn: () => getProductList(),
+	})
+	const productList: ProductType[] = data?.data;
 
-                    <p className="text-sm sm:text-base md:text-lg">
-                        Our products are used in various fields like power plants, telecom, hospitals, and more. We offer a wide range of models to meet the needs of different industries, and our customers are very satisfied with our products.
-                    </p>
+	return (
+		<main className='pt-14 sm:pt-16 md:pt-18 lg:pt-20'>
+			<Navbar />
+			<section className='w-full h-[60vh] sm:h-[70vh] md:h-[80vh] bg-[url("/assets/hero.jpg")] bg-no-repeat bg-cover bg-center'>
+				{' '}
+				<div className='lg:animate-slide-right delay-0 w-full md:w-10/12 lg:w-8/12 h-full bg-[#000522BF] clip flex flex-col px-4 sm:px-6 md:px-10 gap-3 sm:gap-4 md:gap-5 justify-center'>
+					<h3 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium w-full md:w-3/4 leading-tight tracking-wider text-white lg:animate-slide-right animation-delay-200 '>
+						{t("Powering Your World with Reliable")}<span className='text-orange-500'>{t("Generators")}</span>
+					</h3>
+					<p className='text-white text-sm sm:text-base md:text-lg lg:text-xl w-full md:w-3/4 leading-normal mt-2 sm:mt-3 md:mt-5 lg:mt-10 tracking-wide sm:tracking-wider lg:animate-slide-up animation-delay-500'>
+						{t("To provide you with stable reliable electricity, Let you enjoy unlimited convienience in life")}
+					</p>
+					<Link to='/generator'>
+						<button className='p-2 sm:p-3  px-4 sm:px-6 md:px-8 lg:px-16 w-32 sm:w-36 md:w-40 lg:w-44 rounded-lg mt-3 sm:mt-4 md:mt-5 lg:mt-10 text-base sm:text-lg md:text-xl lg:text-2xl  tracking-wider flex justify-center items-center bg-orange-700 text-white'>
+							{t("Explore")}
+						</button>
+					</Link>
+					
+				</div>
+			</section>
 
-                    <p className="text-sm sm:text-base md:text-lg">
-                        Africa is growing fast, but faces power shortages. China's "Belt and Road" initiative aims to help. We're excited to be part of it, bringing our products to support Africa's growth and development       
-                    </p>
+			{/* About */}
+			<section className={`w-full grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 py-12 sm:py-16 md:py-20 lg:py-32 xl:py-52 bg-[url("/assets/about-bg.png")] bg-cover bg-no-repeat bg-center px-4 sm:px-6 md:px-10 lg:px-16 ${startFirstAnimation && 'lg:animate-bg-slide-in'}`}>
+				<div className='w-full flex justify-center lg:justify-end relative' ref={elementOne.containerRef}>
+					<img
+						src='/assets/about-img-02.jpg'
+						alt='about-page'
+						className={`w-full sm:w-4/5 md:w-3/4 lg:w-[561px] h-[250px] sm:h-[300px] md:h-[350px] lg:h-[452px] object-cover object-center ${startFirstAnimation ? 'lg:animate-slide-down': ''}`}
+					/>
+					<img
+						src='/assets/longlian-about.png'
+						alt='about-page'
+						className={`hidden lg:block w-[561px] h-[452px] object-cover object-center absolute top-16 -right-10 ${startFirstAnimation ? 'lg:animate-slide-right' : ''}`}
+					/>
+				</div>
 
-                    <Link to="/faq" className='p-2 sm:p-3 text-base sm:text-lg md:text-xl max-w-32 sm:max-w-36 md:max-w-44 tracking-wider flex justify-center items-center bg-orange-600 text-white'>
-                        Learn more
-                    </Link>
-                </div>
-            </section>
+				<div className={`w-full lg:w-11/12 xl:w-9/12 flex flex-col relative mt-6 lg:mt-0 lg:ml-10 xl:ml-32 [&>p]:mb-4 sm:[&>p]:mb-5 md:[&>p]:mb-6 lg:[&>p]:mb-7 ${startFirstAnimation && 'lg:animate-slide-left'}`}>
+					<h3 className='text-orange-500 text-lg sm:text-xl font-semibold'>{t("About")}</h3>
 
-            {/* Product */}
-            <section className='w-full h-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 md:gap-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-32'>
-                {productList?.slice(0, 2)?.map((product:any) => <Product key={product.id} {...product}/>)}
-                <div className='bg-blue-900 p-4 sm:p-5 mt-6 sm:mt-8 md:mt-10 h-auto sm:h-[90%] md:h-[85%] lg:h-[80%]'>
-                    <h3 className='text-white text-lg sm:text-xl'>Top Products</h3>
-                    <hr className='bg-gray-400 my-2 sm:my-3 w-10/12'/>
-                    {productList?.slice(3, 5).map((product:any) => 
-                    <Link to={`/generators/details/${product.id}`} key={product.id}>
-                        <div className='bg-white h-8 sm:h-10 flex justify-center items-center relative mt-4 sm:mt-5 md:mt-7'>
-                            <div className='bg-orange-600 w-1 sm:w-1.5 absolute left-0 h-full'></div>
-                            <p className='text-black text-sm sm:text-base truncate w-11/12'>{product.model} {product.description}</p>
-                        </div>
-                    </Link>
-                    )}
-                </div>
-            </section>
+					<h3 className='text-xl sm:text-2xl md:text-3xl text-navy-500 font-medium py-2 sm:py-3'>
+						{t("Know More About LongLian")}
+					</h3>
 
-            {/* Core Values */}
-            <section className='w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10 lg:px-16'>
-                <div className='flex flex-col justify-center relative'>
-                    <h3 className='text-orange-500 text-lg sm:text-xl font-semibold'>
-                        Why Choose Us
-                    </h3>
+					<p className='text-sm sm:text-base md:text-lg'>
+						{t("Our company, Long Lian Industry and Trading Limited, specializes in diesel generators and has been in operation for over 20 years. We adhere to the principles of human-centered design, follow professional production standards, and provide quality after-sales service. Our commitment to continuous research, development, and meeting market demands has always been our hallmark. We continuously invest in and produce the latest international cutting-edge technology. Our products come in various volumes and sizes, are lightweight, produce low noise, consume less fuel, emit less, and guarantee smooth startup and performance. Our products serve as an ideal main power supply and emergency backup power supply")}
+					</p>
 
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl text-navy-500 font-medium py-2 sm:py-3">
-                        Our Core Values
-                    </h3>
+					<p className='text-sm sm:text-base md:text-lg'>
+						{t("Over the years, our company has established long-term partnerships with world-renowned companies such as CUMMINS, Perkins, Weichai, Yuchai, and Shangchai. Our business has expanded to Southeast Asia, the Middle East, and South America, with our products being widely utilized in various industries, including: powerhouse stations, telecommunications stations, military service, railway industry, road and construction, banking , real estate, manufacturing, hospitals, schools and other industries. Our comprehensive range of products meets all power supply needs, as attested to by our satisfied customers.")}
+					</p>
 
-                    <p className='mt-2 sm:mt-3 text-base sm:text-lg md:text-xl tracking-wide sm:tracking-wider leading-snug'>
-                        At Jigdoli Industry and Trade Co, Ltd, we believe that strong values are the foundation of trust, innovation, and exceptional results.
-                        Our core values guide our actions, decisions. and relationships, and are at the heart of everything we do.
-                    </p>
-                </div>
+					<p className='text-sm sm:text-base md:text-lg'>
+						{t("Africa is growing fast, but faces power shortages. China's Belt and Road initiative aims to help. We're excited to be part of it, bringing our products to support Africa's growth and development.")}
+					</p>
 
-                <div className='flex flex-col lg:flex-row relative mt-6 lg:mt-0'>
-                    <div className='flex flex-col gap-y-12 sm:gap-y-16 md:gap-y-20'>
-                    <div className="p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 relative rounded-md">
-                        <div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
-                            <h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>
-                                01
-                            </h3>
-                        </div>
-                    
-                        <h3 className="text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3">
-                            Reliable
-                        </h3>
-                        <p className="text-sm sm:text-base">
-                            We prioritize reliability, ensuring our durable and sturdy equipment performs optimally in harsh environments. 
-                        </p>
-                    </div>
+					<Link to= '/faq'>
+						<button className='p-2 sm:p-3 text-base sm:text-lg md:text-xl max-w-32 sm:max-w-36 md:max-w-44 tracking-wider flex justify-center items-center bg-orange-600 text-white'>
+							{t("Learn more")}
+						</button>
+					</Link>
+					
+				</div>
+			</section>
 
-                    <div className="p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 relative rounded-md mt-4 sm:mt-5">
-                        <div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
-                            <h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>
-                                03
-                            </h3>
-                        </div>
-                    
-                        <h3 className="text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3">
-                            Innovative
-                        </h3>
-                        <p className="text-sm sm:text-base">
-                            We embrace innovation, offering fully automatic configuration and robust protection performance to meet your evolving needs. 
-                        </p>
-                    </div>
-                </div>
+			{/* Product */}
+			<section ref={elementTwo.containerRef} className='w-full h-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 md:gap-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-32'>
+				<div className={`inline-flex items-center flex-wrap md:flex-nowrap md:col-span-2 gap-4 ${startSecondAnimation && 'lg:animate-slide-right'}`}>
+				{!isLoading &&
+					productList?.slice(0, 2)?.map(product => (
+						<Link key={product.id} to={`/generators/details/${product.id}`}>
+							<Product key={product.id} {...product} />
+						</Link>
+					))}
+					</div>
+				<div className={`bg-blue-900 p-4 sm:p-5 mt-6 sm:mt-8 md:mt-10 h-auto sm:h-[90%] md:h-[85%] lg:h-[80%] ${startSecondAnimation && 'animate-slide-left'}`}>
+					<h3 className='text-white text-lg sm:text-xl'>{t("Top Products")}</h3>
+					<hr className='bg-gray-400 my-2 sm:my-3 w-10/12' />
+					{!isLoading &&
+						productList?.slice(3, 6).map(product => (
+							<Link key={product.id} to={`/generators/details/${product.id}`}>
+								<div className='bg-white h-8 sm:h-10 flex justify-center items-center relative mt-4 sm:mt-5 md:mt-7'>
+									<div className='bg-orange-600 w-1 sm:w-1.5 absolute left-0 h-full'></div>
+									<p className='text-black text-sm sm:text-base truncate w-11/12'>
+										{product.model} {product.description}
+									</p>
+								</div>
+							</Link>
+						))}
+				</div>
+			</section>
 
-                <div className='flex flex-col gap-y-12 sm:gap-y-16 md:gap-y-20 mt-12 lg:mt-20 lg:px-6 xl:px-12'>
-                    <div className="p-4 sm:p-5 shadow bg-white relative space-y-2 sm:space-y-3 rounded-md">
-                        <div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
-                            <h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>
-                                02
-                            </h3>
-                        </div>
-                    
-                        <h3 className="text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3">
-                            Efficient
-                        </h3>
-                        <p className="text-sm sm:text-base">
-                            We strive for efficiency achieving high power density and economic efficiency 
-                            through innovative design and material 
-                        </p>
-                    </div>
+			{/* Core Values */}
+			<section ref={elementThree.containerRef} className='w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10 lg:px-16'>
+				<div className='flex flex-col justify-center relative'>
+					<h3 className={`text-orange-500 text-lg sm:text-xl font-semibold ${startThirdAnimation ? 'animate-slide-down':''}`}>{t("Why Choose Us")}</h3>
 
-                    <div className="p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 rounded-md relative mt-4 sm:mt-5">
-                        <div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
-                            <h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>
-                                04
-                            </h3>
-                        </div>
-                    
-                        <h3 className="text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3">
-                            Customer-Centric
-                        </h3>
-                        <p className="text-sm sm:text-base">
-                            We put customers first, providing silent configuration options and a complete range of products to meet the unique demands of various industries
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+					<h3 className={`text-2xl sm:text-3xl md:text-4xl text-navy-500 font-medium py-2 sm:py-3 ${startThirdAnimation ? 'animate-slide-down' : ''}`}>
+						{t("Our Core Values")}
+					</h3>
 
-        {/* Kpi */}
-        <section className='w-full bg-[url("/assets/kpi.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
-                <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 bg-[#000522BF] p-4 sm:p-6 md:p-8 lg:p-10 py-20 sm:py-30 md:py-40'>
-                <div className="w-full flex flex-col items-center gap-5">
-                    <div className="w-44 h-44 rounded-full bg-[#FBECE6] mt-5 items-center justify-center flex relative">
-                        <img src="/assets/20-years.png" alt="20 years" className="h-36 w-36"/> 
-                    </div>
-                    <div>
-                        <p className="text-base sm:text-lg md:text-xl text-white max-w-60 sm:max-w-80 text-center">Focus on generator set products</p>
-                    </div>
-                </div>
+					<p className='mt-2 sm:mt-3 text-base sm:text-lg md:text-xl tracking-wide sm:tracking-wider leading-snug animate-slide-right'>
+						{t("At Long Lian Industry and Trade Co, Ltd, we believe that strong values are the foundation of trust, innovation, and exceptional results. Our core values guide our actions,decisions, and relationships, and are at the heart of everything we do.")}
+					</p>
+				</div>
 
-                <div className="w-full flex flex-col items-center gap-4 sm:gap-5">
-                    <div className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full bg-[#FBECE6] mt-4 sm:mt-5 items-center justify-center flex">
-                        <img src="/assets/generator.png" alt="generator" className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32"/>
-                    </div>
-                    <div>
-                        <p className="text-base sm:text-lg md:text-xl text-white max-w-60 sm:max-w-80 text-center">Small size, light weight, no noise</p>
-                    </div>
-                </div>
+				<div className='flex flex-col lg:flex-row relative mt-6 lg:mt-0'>
+					<div className='flex flex-col gap-y-12 sm:gap-y-16 md:gap-y-20'>
+						<div className={`p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 relative rounded-md ${startThirdAnimation && 'lg:animate-slide-top-left-down'}`}>
+							<div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
+								<h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>01</h3>
+							</div>
 
-                <div className="w-full flex flex-col items-center gap-4 sm:gap-5">
-                    <div className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full bg-[#FBECE6] items-center justify-center flex">
-                        <img src="/assets/house.png" alt="house" className="h-24 w-24 sm:h-28 sm:w-28 md:h-36 md:w-36"/>
-                    </div>
-                    <div>
-                        <p className="text-base sm:text-lg md:text-xl text-white max-w-60 sm:max-w-80 text-center">Less exhaust gas, less fuel consumption, good starting performance</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+							<h3 className='text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3'>
+								{t("Reliable")}
+							</h3>
+							<p className='text-sm sm:text-base'>
+								{t("We prioritize reliability, ensuring our durable and sturdy equipment performsoptimally in harsh environments.")}
+							</p>
+						</div>
 
-        {/* testimonials */}
-        <section className='w-full flex flex-col items-center p-4 sm:p-6 md:p-8 lg:p-10 py-20 sm:py-30 md:py-44'>
-                <h3 className='text-orange-500 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-wider text-center'>
-                    Clients Testimonials
-                </h3>
-                <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 mt-6 sm:mt-8 md:mt-10 max-w-[1450px]'>
-                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
-                    <div className="flex items-center gap-3">
-                        <img src="./assets/card3.jpeg" alt="logo" className="w-16 h-16  rounded-full"/>
-                    <div>
-                        <h3 className="text-lg text-orange-500 font-medium">Prof Fredrick Abban</h3>
-                        <p className="text-sm text-gray-500">Deputy Speaker</p>
-                    </div>
-                    </div>
-                    <div className="pt-5">
-                        Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough
-                    </div>
-                </div>
-                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
-                    <div className="flex items-center gap-3">
-                        <img src="./assets/card1.jpg" alt="logo" className="w-16 h-16  rounded-full"/>
-                    <div>
-                        <h3 className="text-lg text-orange-500 font-medium">Xia Wanqiu</h3>
-                        <p className="text-sm text-gray-500">Deputy Speaker</p>
-                    </div>
-                    </div>
-                    <div className="pt-5">
-                        Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough
-                    </div>
-                </div>
-                <div className="p-5 rounded-md shadow-2xl bg-white space-y-3">
-                    <div className="flex items-center gap-3">
-                        <img src="./assets/card2.png" alt="logo" className="w-16 h-16  rounded-full"/>
-                    <div>
-                        <h3 className="text-lg text-orange-500 font-medium">Prof Freda Abban</h3>
-                        <p className="text-sm text-gray-500">Deputy Speaker</p>
-                    </div>
-                    </div>
-                    <div className="pt-5">
-                        Long Lian Industry and Trade's products have revolutionized our business. Their generators are incredibly reliable, efficient, and durable. I highly recommend them to everyone.
-                    </div>
-                </div>
-            </div>
-        </section>
-        <Footer/>
-    </main>
-  )
+						<div className={`p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 relative rounded-md mt-4 sm:mt-5 ${startThirdAnimation && 'lg:animate-slide-bottom-left-up'}`}>
+							<div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
+								<h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>03</h3>
+							</div>
+
+							<h3 className='text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3'>
+								{t("Innovative")}
+							</h3>
+							<p className='text-sm sm:text-base'>
+								{t("We embrace innovation, offering fully automatic configuration and robust protection performance to meet your evolving needs.")}
+							</p>
+						</div>
+					</div>
+
+					<div className='flex flex-col gap-y-12 sm:gap-y-16 md:gap-y-20 mt-12 lg:mt-20 lg:px-6 xl:px-12'>
+						<div className={`p-4 sm:p-5 shadow bg-white relative space-y-2 sm:space-y-3 rounded-md ${startThirdAnimation && 'lg:animate-slide-top-right-down'}`}>
+							<div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
+								<h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>02</h3>
+							</div>
+
+							<h3 className='text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3'>
+								{t("Efficient")}
+							</h3>
+							<p className='text-sm sm:text-base'>
+								{t("We strive for efficiency achieving high power density and economic efficiency through innovative design and material")}
+							</p>
+						</div>
+
+						<div className={`p-4 sm:p-5 shadow bg-white space-y-2 sm:space-y-3 rounded-md relative mt-4 sm:mt-5 ${startThirdAnimation && 'lg:animate-slide-bottom-right-up'}`}>
+							<div className='w-16 h-16 sm:w-20 sm:h-20 absolute -top-8 sm:-top-10 bg-orange-600 rounded-full flex justify-center items-center'>
+								<h3 className='text-2xl sm:text-3xl font-semibold tracking-wider text-white'>04</h3>
+							</div>
+
+							<h3 className='text-xl sm:text-2xl text-navy-500 font-medium py-2 sm:py-3'>
+								{t("Customer-Centric")}
+							</h3>
+							<p className='text-sm sm:text-base'>
+								{t("We put customers first, providing silent configuration options and a complete range of products to meet the unique demands of various industries")}
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* Kpi */}
+			<section className='w-full bg-[url("/assets/longlian-about.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
+				<div className='w-full grid grid-cols-3 gap-8 bg-[#000522BF] p-8 py-20'>
+					<div className='w-full flex flex-col items-center gap-4'>
+					<div className='w-40 h-40 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full bg-[#FBECE6] mt-3 items-center justify-center flex relative'>
+						<img src='/assets/20-years.png' alt='20 years' className='h-32 w-32' />
+					</div>
+					<div>
+						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
+						{t("Focus on generator set products")}
+						</p>
+					</div>
+					</div>
+
+					<div className='w-full flex flex-col items-center gap-4'>
+					<div className='w-32 h-32 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-[#FBECE6] mt-3 items-center justify-center flex'>
+						<img
+						src='/assets/generator.png'
+						alt='generator'
+						className='h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28'
+						/>
+					</div>
+					<div>
+						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
+						{t("Small size, light weight, no noise")}
+						</p>
+					</div>
+					</div>
+
+					<div className='w-full flex flex-col items-center gap-4'>
+					<div className='w-32 h-32 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-[#FBECE6] items-center justify-center flex'>
+						<img
+						src='/assets/house.png'
+						alt='house'
+						className='h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28'
+						/>
+					</div>
+					<div>
+						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
+						{t("Less exhaust gas, less fuel consumption, good starting performance")}
+						</p>
+					</div>
+					</div>
+				</div>
+			</section>
+
+			{/* testimonials */}
+			<section className='w-full flex flex-col items-center p-6 sm:p-8 md:p-10 py-16 sm:py-20 md:py-32 lg:py-44'>
+				<h3 className='text-orange-500 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-wider text-center'>
+					{t("Clients Testimonials")}
+				</h3>
+				<div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 mt-8 sm:mt-10 max-w-[1450px]'>
+					<div className='p-5 rounded-md shadow-2xl bg-white space-y-3'>
+						<div className='flex items-center gap-3'>
+							<img src='./assets/card2.png' alt='logo' className='w-16 h-16  rounded-full' />
+							<div>
+								<h3 className='text-lg text-orange-500 font-medium'>{t("Prof Freda Abban")}</h3>
+								<p className='text-sm text-gray-500'>{t("Deputy Speaker")}</p>
+							</div>
+						</div>
+						<div className='pt-5'>
+							{t("Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough")}
+						</div>
+					</div>
+
+					<div className='p-5 rounded-md shadow-2xl bg-white space-y-3'>
+						<div className='flex items-center gap-3'>
+							<img src='./assets/card1.jpg' alt='logo' className='w-16 h-16  rounded-full' />
+							<div>
+								<h3 className='text-lg text-orange-500 font-medium'>{t("Xia Wanqui")}</h3>
+								<p className='text-sm text-gray-500'>{t("Deputy Speaker")}</p>
+							</div>
+						</div>
+						<div className='pt-5'>
+							{t("Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough")}
+						</div>
+					</div>
+
+					<div className='p-5 rounded-md shadow-2xl bg-white space-y-3'>
+						<div className='flex items-center gap-3'>
+							<img src='./assets/card3.jpeg' alt='logo' className='w-16 h-16  rounded-full' />
+							<div>
+								<h3 className='text-lg text-orange-500 font-medium'>{t("Prof Elliet Allan")}</h3>
+								<p className='text-sm text-gray-500'>{t("Deputy Speaker")}</p>
+							</div>
+						</div>
+						<div className='pt-5'>
+							{t("Long Lian Industry and Trade's products have been a game changer for our business.Their generator have proven to be reliable,efficient and durable. We can't recommend them enough")}
+						</div>
+					</div>
+				</div>
+			</section>
+			<Footer />
+		</main>
+	)
 }

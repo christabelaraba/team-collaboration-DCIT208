@@ -1,3 +1,4 @@
+import { t } from 'i18next'
 import { Footer } from '../../components/custom/Footer'
 import { Navbar } from '../../components/custom/Navbar'
 
@@ -11,7 +12,7 @@ export default function FAQ() {
             <section className='w-full flex justify-center px-4 sm:px-6 lg:px-8 my-8 sm:my-12 md:my-16'>
                 <div className='space-y-6 w-full max-w-3xl'>
                     <h1 className='w-full uppercase text-2xl sm:text-3xl md:text-4xl tracking-wider font-semibold text-center mb-8'> 
-                        Frequently Asked Questions
+                        {t("Frequently Asked Questions")}
                     </h1>
 
                     {[

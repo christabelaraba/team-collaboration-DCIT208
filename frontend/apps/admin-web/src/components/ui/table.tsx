@@ -112,9 +112,9 @@ export {
   Table,
   TableHeader,
   TableBody,
-  // TableFooter,
+  TableFooter,
   TableHead,
   TableRow,
   TableCell,
-  // TableCaption,
+  TableCaption,
 }
