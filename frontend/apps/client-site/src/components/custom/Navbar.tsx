@@ -26,7 +26,7 @@ export const Navbar = () => {
                     <ul className="flex items-center gap-3 lg:gap-4 text-sm">
                         <li><Search className="text-orange-600 cursor-pointer w-4 h-4"/></li>
                         <li><a href="/" className="hover:text-orange-600">{t("Home")}</a></li>
-                        <li><a href="/generator" className="hover:text-orange-600">{t("Generators")}</a></li>
+                        <li><Link to="/generator" className="hover:text-orange-600">{t("Generators")}</Link></li>
                         <li><a href="#" className="hover:text-orange-600">{t("News")}</a></li>
                     </ul>
                 </div>
@@ -45,7 +45,7 @@ export const Navbar = () => {
                         <li><Link to="/contactus" className="hover:text-orange-600">{t("Contact Us")}</Link></li>
                         <li><Link to="/faq" className="hover:text-orange-600">{t("FAQ")}</Link></li>
                         <li><a href="/" className="hover:text-orange-600">{t("Home")}</a></li>
-                        <li><a href="/generator" className="hover:text-orange-600">{t("Generators")}</a></li>
+                        <li><Link to="/generator" className="hover:text-orange-600">{t("Generators")}</Link></li>
                         <li><a href="#" className="hover:text-orange-600">{t("News")}</a></li>
                     </ul>
                 </div>

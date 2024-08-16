@@ -45,9 +45,11 @@ export default function Login({ className, ...props }: UserAuthFormProps) {
             toast.success((res.data as any).response_message);
 
             // Delay the reload by 4 seconds to show the toast
-            setTimeout(() => {
-                window.location.reload();
-            }, 4000); // 4000 ms = 4 seconds
+            // setTimeout(() => {
+                // window.location.reload();
+                // navigate('/dashboard')
+                window.location.href = '/';
+            // }, 4000); // 4000 ms = 4 seconds
 
         } else {
             toast.error((res.data as any).response_message || "Login details incorrect, Try again");
