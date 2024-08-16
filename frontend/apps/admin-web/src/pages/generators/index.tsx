@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { Label } from '@/components/ui/label'
@@ -20,9 +21,9 @@ import {
 import { Link } from 'react-router-dom'
 import { Tabs, TabsContent } from '@/components/ui/tabs'
 import { Card, CardContent } from '@/components/ui/card'
-import { addDays, format } from 'date-fns'
-import React from 'react'
-import { DateRange } from 'react-day-picker'
+// import { addDays } from 'date-fns'
+// import React from 'react'
+// import { DateRange } from 'react-day-picker'
 import {
 	Select,
 	SelectContent,
@@ -38,10 +39,10 @@ import { getProducts } from '@/api/data/query'
 
 
 export default function Generators() {
-	const [date, setDate] = React.useState<DateRange | undefined>({
-		from: new Date(2022, 0, 20),
-		to: addDays(new Date(2022, 0, 20), 20),
-	})
+	// const [date, setDate] = React.useState<DateRange | undefined>({
+	// 	from: new Date(2022, 0, 20),
+	// 	to: addDays(new Date(2022, 0, 20), 20),
+	// })
 
 	const { data: products } = useQuery({
 		queryFn: getProducts,
