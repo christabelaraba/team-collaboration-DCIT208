@@ -1,5 +1,5 @@
 import apiClient from "../client";
-import { AuthSchema } from "../schema"
+// import { AuthSchema } from "../schema"
 
 interface AddProductsProps {
   model: string,
@@ -31,11 +31,13 @@ export const AddProducts = async (data: AddProductsProps) => {
    return res
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createQuotes = async (data: any) => {
 	const res = await apiClient.post('/admin/create_quote', data)
 	return res
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const respondToEnquiry = async (data: any) => {
    const res = await apiClient.post('/admin/reply_enquiry', data)
    return res

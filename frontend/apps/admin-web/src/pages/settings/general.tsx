@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
+// import { Textarea } from "@/components/ui/textarea"
 import PageHead from "@/components/custom/page-head"
 
 import {
@@ -125,7 +125,9 @@ export default function General() {
            
             <div className="flex items-center ">
             <Button type="submit" className="w-56 text-xl h-12 bg-orange-600 text-white rounded hover:bg-orange-600 mx-auto uppercase tracking-wider">SAVE CHANGES</Button>
-          <Button type="submit" className="w-32 text-xl h-12 border-orange-600 text-orange-600 border rounded hover:border-orange-600 mx-auto uppercase tracking-wider">CANCEL</Button>
+            <Link to='/settings'>
+          <Button type="submit" className="w-32 text-xl h-12 border-orange-600 text-orange-600 border rounded hover:border-orange-600 mx-auto uppercase tracking-wider">BACK</Button>
+            </Link>
           </div>
       </form>
     </div>

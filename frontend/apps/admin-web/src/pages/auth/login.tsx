@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import * as React from "react"
@@ -11,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { useMutation } from "@tanstack/react-query"
 import { LoginFunc } from "@/api/data/mutations"
-import { useRouter } from "@/routes/hooks"
+// import { useRouter } from "@/routes/hooks"
 import { toast } from "react-toastify"
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 interface dataProps {
@@ -20,7 +21,7 @@ interface dataProps {
 }
 export default function Login({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const router = useRouter()
+  // const router = useRouter()
   const [data, setData] = React.useState<dataProps>({
     email: "",
     password: "",
@@ -32,20 +33,32 @@ export default function Login({ className, ...props }: UserAuthFormProps) {
 
   
   async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault()
-    setIsLoading(true) 
-    const res = await loginMutation.mutateAsync(data)
-    if ((res.data as any).response_code === "012"){
-      Cookies.set('token', (res.data as any).accessToken)
-      Cookies.set('user', JSON.stringify((res.data as any).data))
-      toast.success((res.data as any).response_message)
-      router.push('/')
+    event.preventDefault();
+    setIsLoading(true); 
+    try {
+        const res = await loginMutation.mutateAsync(data);
+        console.log(res, (res.data as any).response_code, typeof (res.data as any).response_code);
 
-    }else{
-      toast.error((res.data as any).response_message || "Login details incorrect, Try again")
-    }    
-    setIsLoading(false)
-  }
+        if ((res.data as any).response_code === "012") {
+            Cookies.set('token', (res.data as any).accessToken);
+            Cookies.set('user', JSON.stringify((res.data as any).data));
+            toast.success((res.data as any).response_message);
+
+            // Delay the reload by 4 seconds to show the toast
+            setTimeout(() => {
+                window.location.reload();
+            }, 4000); // 4000 ms = 4 seconds
+
+        } else {
+            toast.error((res.data as any).response_message || "Login details incorrect, Try again");
+        }
+    } catch (error) {
+        console.error("Login failed", error);
+        toast.error("An error occurred during login. Please try again.");
+    } finally {
+        setIsLoading(false);
+    }
+}
 
   return (
    <Layout>

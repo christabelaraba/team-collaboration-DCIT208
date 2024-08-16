@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import PageHead from '@/components/custom/page-head'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent } from '@/components/ui/tabs'
@@ -14,7 +15,7 @@ import React from 'react'
 import Cookies from 'js-cookie'
 import { useRouter } from '@/routes/hooks'
 import { useQuery } from '@tanstack/react-query'
-import { getOrders, getQuotes } from '@/api/data/query'
+import { getOrders, getQuoteStatistics } from '@/api/data/query'
 import moment from 'moment'
 export default function DashboardPage() {
 	const user = Cookies.get('user')
@@ -23,6 +24,7 @@ export default function DashboardPage() {
 		if (!user) {
 			router.push('/login')
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const { data: orders } = useQuery({
@@ -30,10 +32,12 @@ export default function DashboardPage() {
 		queryKey: ['orders'],
 	})
 
-	const { data: quotes } = useQuery({
-		queryFn: getQuotes,
-		queryKey: ['quotes'],
+	const { data: quotesStats } = useQuery({
+		queryFn: getQuoteStatistics,
+		queryKey: ['quotesStats'],
 	})
+
+
 	return (
 		<>
 			<PageHead title='Dashboard | App' />
@@ -61,7 +65,7 @@ export default function DashboardPage() {
 									</svg>
 								</CardHeader>
 								<CardContent>
-									<div className='text-2xl font-bold'>{(quotes?.data as any)?.data.length}</div>
+									<div className='text-2xl font-bold'>{quotesStats?.data?.totalQuoteCount}</div>
 									{/* <p className='text-xs text-muted-foreground'>
 										{((quotes?.data as any)?.data.length / 100) * 100}% from last month
 									</p> */}
@@ -85,7 +89,7 @@ export default function DashboardPage() {
 								</CardHeader>
 								<CardContent>
 									<div className='text-2xl font-bold'>
-										{(quotes?.data as any)?.data.filter((q: any) => q.status === 'Pending').length}
+										{quotesStats?.data?.pendingQuoteCount}
 									</div>
 									{/* <p className='text-xs text-muted-foreground'>+5% from last month</p> */}
 								</CardContent>
@@ -109,7 +113,7 @@ export default function DashboardPage() {
 								<CardContent>
 									<div className='text-2xl font-bold'>
 										{' '}
-										{(quotes?.data as any)?.data.filter((q: any) => q.status === 'Approved').length}
+										{quotesStats?.data?.approvedQuoteCount}
 									</div>
 									{/* <p className='text-xs text-muted-foreground'>+5% from last month</p> */}
 								</CardContent>
@@ -133,34 +137,42 @@ export default function DashboardPage() {
 								<CardContent>
 									<div className='text-2xl font-bold'>
 										{' '}
-										{(quotes?.data as any)?.data.filter((q: any) => q.status === 'Rejected').length}
+										{quotesStats?.data?.rejectedQuoteCount}
 									</div>
 									{/* <p className='text-xs text-muted-foreground'>+5% from last month</p> */}
 								</CardContent>
 							</Card>
 						</div>
 						<div className='grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3'>
-							<Card className=''>
-								<CardContent className='w-full p-0 h-20 flex items-center justify-center'>
-									<Link to='new-quote' className='text-xl tracking-wider font-semibold'>
-										Create New Quote
-									</Link>
-								</CardContent>
-							</Card>
-							<Card className=''>
-								<CardContent className='w-full p-0 h-20 flex items-center justify-center'>
-									<Link to='all-quote' className='text-xl tracking-wider font-semibold'>
-										View All Quote
-									</Link>
-								</CardContent>
-							</Card>
-							<Card className=''>
-								<CardContent className='w-full p-0 h-20 flex items-center justify-center'>
-									<Link to='generate' className='text-xl tracking-wider font-semibold'>
-										Generate Report
-									</Link>
-								</CardContent>
-							</Card>
+							<Link to="new-quote" className="w-full">
+								<Card className="cursor-pointer">
+									<CardContent className="w-full p-0 h-20 flex items-center justify-center">
+										<span className="text-xl tracking-wider font-semibold">
+											Create New Quote
+										</span>
+									</CardContent>
+								</Card>
+							</Link>
+
+							<Link to="all-quote" className="w-full">
+								<Card className="cursor-pointer">
+									<CardContent className="w-full p-0 h-20 flex items-center justify-center">
+										<span className="text-xl tracking-wider font-semibold">
+											View All Quote
+										</span>
+									</CardContent>
+								</Card>
+							</Link>
+
+							<Link to="generate" className="w-full">
+								<Card className="cursor-pointer">
+									<CardContent className="w-full p-0 h-20 flex items-center justify-center">
+										<span className="text-xl tracking-wider font-semibold">
+											Generate Report
+										</span>
+									</CardContent>
+								</Card>
+							</Link>
 							{/* <Card className="col-span-4">
                 <CardHeader>
                   <CardTitle>Overview</CardTitle>
@@ -198,7 +210,7 @@ export default function DashboardPage() {
 										</TableRow>
 									</TableHeader>
 									<TableBody>
-										{(orders?.data as any)?.data?.map((order: any) => (
+										{(orders as any)?.data?.map((order: any) => (
 											<TableRow key={order.id} className='border-none '>
 												<TableCell>{order.id}</TableCell>
 												<TableCell className='font-medium'>

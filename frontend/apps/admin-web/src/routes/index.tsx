@@ -10,8 +10,18 @@ import Report from '@/pages/report'
 import Settings from '@/pages/settings'
 import General from '@/pages/settings/general'
 import { Suspense, lazy } from 'react'
-import { Navigate, Outlet, redirect, useRoutes } from 'react-router-dom'
+import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import Notifications from '@/pages/settings/notification'
+import Security from '@/pages/settings/security/index'
+import ChangePassword from '@/pages/settings/security/change-password'
+import HelpSupport from '@/pages/settings/help/index'
+import ContactSupport from '@/pages/settings/help/ContactSupport'
+import AdminManagement from '@/pages/settings/admin/index'
+import AdminManagementForm from '@/pages/settings/admin/AdminManagementForm'
+import FAQ from '@/pages/settings/help/faq'
+import ProfileSettings from '@/pages/settings/profile'
+import AdminDetails from '@/pages/settings/admin/details'
 const DashboardLayout = lazy(() => import('@/pages/layout'))
 const LoginPage = lazy(() => import('@/pages/auth/login'))
 const DashboardPage = lazy(() => import('@/pages/dashboard'))
@@ -76,11 +86,50 @@ export default function AppRouter() {
 				},
 				{
 					path: '/settings/profile',
-					element: <Settings />,
+					element: <ProfileSettings />,
 				},
 				{
 					path: '/settings/general',
 					element: <General />,
+				},
+				{
+					path: '/settings/notification',
+					element: <Notifications/>
+				},
+				{
+					path: '/settings/security',
+					element: <Security/>,
+				},
+				{
+					path: '/settings/security/change-password',
+					element: <ChangePassword/>
+				},	
+				{
+
+					path: '/settings/help',
+					element: <HelpSupport />,
+
+				},	
+				
+				{
+					path: '/settings/help/contact-support',
+					element: <ContactSupport />,
+				},
+				{
+					path: '/settings/help/faq',
+					element: <FAQ />,
+				},
+				{
+					path: '/settings/admin',
+					element: <AdminManagement />,
+				},
+				{
+					path: '/settings/admin/form',
+					element: <AdminManagementForm />,
+				},
+				{
+					path: '/settings/admin/details',
+					element: <AdminDetails />,
 				},
 			],
 		},
@@ -102,6 +151,7 @@ export default function AppRouter() {
 		},
 	]
 
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const routes = useRoutes([...dashboardRoutes, ...publicRoutes])
 
 	return routes
