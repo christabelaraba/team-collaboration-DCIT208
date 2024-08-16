@@ -4,6 +4,8 @@ import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { Link } from "react-router-dom";
 
 const AdminManagement = () => {
+
+  
   return (
     <div className="min-h-screen bg-white p-6">
       <div className="max-w-3xl mx-auto">

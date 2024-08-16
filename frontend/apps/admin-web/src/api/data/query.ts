@@ -1,5 +1,5 @@
 import apiClient from "../client"
-import { CustomersResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, QuoteIdRecordResponse, QuoteStatisticsResponse } from "./interfaces"
+import { CustomersResponse, DefaultApiResponse, EnquiriesResponse, GetOrderResponse, GetProductResponse, GetQuotesResponse, QuoteIdRecordResponse, QuoteStatisticsResponse, UserProfile } from "./interfaces"
 // import { ProductResponseSchema, ProductResponseType } from "../schema"
 
 
@@ -114,3 +114,27 @@ export const getQuoteStatistics = async (): Promise<QuoteStatisticsResponse | un
    const res = await apiClient.get<QuoteStatisticsResponse>('/admin/quotes_statistics');
    return res.data;
 };
+
+export const getProfile = async (): Promise<UserProfile | undefined> => {
+   const res = await apiClient.get<UserProfile>('/admin/profile');
+   console.log(res.data);
+   return res.data;
+};
+
+
+export const updateProfile = async (profileData: {first_name: string; last_name: string; phone_number: string; }): Promise<DefaultApiResponse | undefined> => {
+   console.log(profileData);
+   
+   const res = await apiClient.post<DefaultApiResponse>("/admin/profile/update", profileData); // Adjust the endpoint URL as needed
+   return res.data;
+ };
+
+
+export const logout = async (): Promise<DefaultApiResponse | undefined> => {
+   try {
+     const res = await apiClient.post<DefaultApiResponse>('/admin/logout');
+     return res.data;
+   } catch (error) {
+     console.error('Logout error:', error);
+   }
+ };
