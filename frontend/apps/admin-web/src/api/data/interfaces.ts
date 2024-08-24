@@ -14,11 +14,30 @@ export interface GetQuotesResponse {
 
 
 
-export interface QuoteIdRecordResponse {
+export interface MonthlyQuoteStats {
+    week: number;
+    approved: number;
+    pending: number;
+    rejected: number;
+}
+
+
+export interface MonthlyQuoteStatsResponse {
     data: {
-        response_code: string;
-        data: string; // Adjust according to the actual data structure
+        weekly_stats: MonthlyQuoteStats[],
+        overall_counts: {
+            approved: number;
+            pending: number;
+            rejected: number;
+        }
     }
+}
+
+export interface QuoteIdRecordResponse {
+    // data: {
+        response_code: string;
+        data: string;
+    // }
 }
 
 
@@ -119,10 +138,35 @@ export interface Product {
     power: string;
     fuel_type: string;
     size: string;
+    price?: number;
+    color?: string;
+    stock_status?: string;
 }
 
 export interface GetProductResponse {
     data: Product[];
+}
+
+export interface User {
+    id: number;
+    first_name: string;
+    last_name: string;
+    username: string;
+    email: string;
+    phone_number: string;
+    user_role: string;
+    active_status: boolean;
+    del_status: boolean;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+export interface GetUsersResponse {
+    data: User[];
+}
+
+export interface GetUserResponse {
+    data: User;
 }
 
 
@@ -143,4 +187,23 @@ export interface UserProfile {
 
 export interface DefaultApiResponse { 
     response_code: string, response_message: string
+}
+
+
+export interface ProductDetailsApiResponse { 
+    response_code: string, response_message: string, data: Product
+}
+
+
+export interface GeneralSettings {
+    company_name?: string;
+    company_email?: string;
+    company_phone?: string;
+    company_address?: string;
+    language?: string;
+    currency?: string;
+}
+
+export interface SettingsDetailsApiResponse { 
+    response_code: string, response_message: string, data: GeneralSettings
 }

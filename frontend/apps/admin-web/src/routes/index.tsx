@@ -13,7 +13,7 @@ import { Suspense, lazy } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Notifications from '@/pages/settings/notification'
-import Security from '@/pages/settings/security/index'
+import Security from '@/pages/settings/security'
 import ChangePassword from '@/pages/settings/security/change-password'
 import HelpSupport from '@/pages/settings/help/index'
 import ContactSupport from '@/pages/settings/help/ContactSupport'
@@ -22,6 +22,8 @@ import AdminManagementForm from '@/pages/settings/admin/AdminManagementForm'
 import FAQ from '@/pages/settings/help/faq'
 import ProfileSettings from '@/pages/settings/profile'
 import AdminDetails from '@/pages/settings/admin/details'
+import GeneratorDetails from '@/pages/generators/details'
+import AddGenerator from '@/pages/generators/new'
 const DashboardLayout = lazy(() => import('@/pages/layout'))
 const LoginPage = lazy(() => import('@/pages/auth/login'))
 const DashboardPage = lazy(() => import('@/pages/dashboard'))
@@ -81,6 +83,14 @@ export default function AppRouter() {
 					element: <Generators />,
 				},
 				{
+					path: 'generators/add',
+					element: <AddGenerator />,
+				},
+				{
+					path: 'generators/:id',
+					element: <GeneratorDetails />,
+				},
+				{
 					path: 'report',
 					element: <Report />,
 				},
@@ -132,7 +142,7 @@ export default function AppRouter() {
 					element: <AdminManagementForm />,
 				},
 				{
-					path: '/settings/admin/details',
+					path: '/settings/admin/details/:id',
 					element: <AdminDetails />,
 				},
 			],

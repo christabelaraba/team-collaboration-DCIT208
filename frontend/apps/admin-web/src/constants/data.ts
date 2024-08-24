@@ -18,12 +18,14 @@ export const navItems: NavItem[] = [
     href: '/orders',
     icon: 'orders',
     label: 'Orders'
-  },{
-    title: 'Report',
-    href: '/report',
-    icon: 'report',
-    label: 'Report'
-  },{
+  },
+  // {
+  //   title: 'Report',
+  //   href: '/report',
+  //   icon: 'report',
+  //   label: 'Report'
+  // },
+  {
     title: 'Generators',
     href: '/generators',
     icon: 'generators',

@@ -37,7 +37,6 @@ export default function Login({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true); 
     try {
         const res = await loginMutation.mutateAsync(data);
-        console.log(res, (res.data as any).response_code, typeof (res.data as any).response_code);
 
         if ((res.data as any).response_code === "012") {
             Cookies.set('token', (res.data as any).accessToken);

@@ -42,3 +42,9 @@ export const respondToEnquiry = async (data: any) => {
    const res = await apiClient.post('/admin/reply_enquiry', data)
    return res
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const changePassword = async (data: any) => {
+	const res = await apiClient.post('/admin/change_password', data)
+	return res
+}
