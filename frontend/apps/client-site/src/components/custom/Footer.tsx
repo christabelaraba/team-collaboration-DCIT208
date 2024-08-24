@@ -69,14 +69,14 @@ export const Footer = () => {
           <div className="w-full sm:w-fit col-span-1 sm:col-span-2 lg:col-span-1">
             <h3 className="text-white text-xl lg:text-2xl tracking-wider mb-4">{t("Newsletter")}</h3>
             <div className="max-w-fit flex flex-col sm:flex-row g ap-2">
-              <input type="email" className="flex-grow w-full sm:w-auto h-12 p-3 text-black" placeholder="Your email" />
-              <button className="w-full sm:w-auto h-12 px-4 bg-orange-500 text-white text-base tracking-wider hover:bg-orange-600 transition-colors">Subscribe</button>
+              <input type="email" className="flex-grow w-full sm:w-auto h-12 p-3 text-black" placeholder={t("Your email")} />
+              <button className="w-full sm:w-auto h-12 px-4 bg-orange-500 text-white text-base tracking-wider hover:bg-orange-600 transition-colors">{t("Subscribe")}</button>
             </div>
           </div>
         </div>
         
         <div className="w-full py-4 flex justify-center items-center bg-[#5738814D]">
-          <p className="text-white text-sm sm:text-base tracking-wide text-center px-4">Copyright @ 2024. All rights reserved</p>
+          <p className="text-white text-sm sm:text-base tracking-wide text-center px-4">{t("Copyright @ 2024. All rights reserved")}</p>
         </div>
       </footer>
     );

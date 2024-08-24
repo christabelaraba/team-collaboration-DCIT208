@@ -50,6 +50,7 @@ const HelpSupport = () => {
               <Link to="/settings/help/faq" className="text-lg font-medium text-gray-900">
                 Frequently Asked Questions
               </Link>
+              <Link to= "/settings/help/faq">
               <svg
                 width="24"
                 height="24"
@@ -65,6 +66,7 @@ const HelpSupport = () => {
                   fill="#131C40"
                 />
               </svg>
+              </Link>
             </div>
           </CardContent>
         </Card>

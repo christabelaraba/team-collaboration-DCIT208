@@ -52,7 +52,7 @@ export default function Home() {
 				{' '}
 				<div className='lg:animate-slide-right delay-0 w-full md:w-10/12 lg:w-8/12 h-full bg-[#000522BF] clip flex flex-col px-4 sm:px-6 md:px-10 gap-3 sm:gap-4 md:gap-5 justify-center'>
 					<h3 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium w-full md:w-3/4 leading-tight tracking-wider text-white lg:animate-slide-right animation-delay-200 '>
-						{t("Powering Your World with Reliable")}<span className='text-orange-500'>{t("Generators")}</span>
+						{t("Powering Your World with Reliable")}<span className='text-orange-500 mx-3'>{t("Generators")}</span>
 					</h3>
 					<p className='text-white text-sm sm:text-base md:text-lg lg:text-xl w-full md:w-3/4 leading-normal mt-2 sm:mt-3 md:mt-5 lg:mt-10 tracking-wide sm:tracking-wider lg:animate-slide-up animation-delay-500'>
 						{t("To provide you with stable reliable electricity, Let you enjoy unlimited convienience in life")}
@@ -211,49 +211,42 @@ export default function Home() {
 
 			{/* Kpi */}
 			<section className='w-full bg-[url("/assets/longlian-about.png")] bg-cover bg-no-repeat bg-center flex flex-col items-center'>
-				<div className='w-full grid grid-cols-3 gap-8 bg-[#000522BF] p-8 py-20'>
-					<div className='w-full flex flex-col items-center gap-4'>
-					<div className='w-40 h-40 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full bg-[#FBECE6] mt-3 items-center justify-center flex relative'>
-						<img src='/assets/20-years.png' alt='20 years' className='h-32 w-32' />
-					</div>
-					<div>
-						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
-						{t("Focus on generator set products")}
-						</p>
-					</div>
-					</div>
+  <div className='w-full grid grid-cols-1 gap-8 md:grid-cols-3 bg-[#000522BF] p-8 py-20'>
+    <div className='w-full flex flex-col items-center gap-4'>
+      <div className='w-32 h-32 md:w-40 md:h-40 rounded-full bg-[#FBECE6] mt-3 flex items-center justify-center'>
+        <img src='/assets/20-years.png' alt='20 years' className='h-20 w-20 md:h-32 md:w-32' />
+      </div>
+      <div>
+        <p className='text-center text-sm md:text-lg text-white max-w-xs'>
+          {t("Focus on generator set products")}
+        </p>
+      </div>
+    </div>
 
-					<div className='w-full flex flex-col items-center gap-4'>
-					<div className='w-32 h-32 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-[#FBECE6] mt-3 items-center justify-center flex'>
-						<img
-						src='/assets/generator.png'
-						alt='generator'
-						className='h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28'
-						/>
-					</div>
-					<div>
-						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
-						{t("Small size, light weight, no noise")}
-						</p>
-					</div>
-					</div>
+    <div className='w-full flex flex-col items-center gap-4'>
+      <div className='w-32 h-32 md:w-40 md:h-40 rounded-full bg-[#FBECE6] mt-3 flex items-center justify-center'>
+        <img src='/assets/generator.png' alt='generator' className='h-20 w-20 md:h-28 md:w-28' />
+      </div>
+      <div>
+        <p className='text-center text-sm md:text-lg text-white max-w-xs'>
+          {t("Small size, light weight, low noise")}
+        </p>
+      </div>
+    </div>
 
-					<div className='w-full flex flex-col items-center gap-4'>
-					<div className='w-32 h-32 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-[#FBECE6] items-center justify-center flex'>
-						<img
-						src='/assets/house.png'
-						alt='house'
-						className='h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28'
-						/>
-					</div>
-					<div>
-						<p className='text-sm sm:text-base md:text-lg text-white max-w-52 sm:max-w-72 text-center'>
-						{t("Less exhaust gas, less fuel consumption, good starting performance")}
-						</p>
-					</div>
-					</div>
-				</div>
-			</section>
+    <div className='w-full flex flex-col items-center gap-4'>
+      <div className='w-32 h-32 md:w-40 md:h-40 rounded-full bg-[#FBECE6] mt-3 flex items-center justify-center'>
+        <img src='/assets/house.png' alt='house' className='h-20 w-20 md:h-28 md:w-28' />
+      </div>
+      <div>
+        <p className='text-center text-sm md:text-lg text-white max-w-xs'>
+          {t("Less exhaust gas, less fuel consumption, good starting performance")}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 			{/* testimonials */}
 			<section className='w-full flex flex-col items-center p-6 sm:p-8 md:p-10 py-16 sm:py-20 md:py-32 lg:py-44'>

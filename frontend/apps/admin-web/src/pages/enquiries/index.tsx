@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
+import moment from "moment";
+
 import PageHead from "@/components/custom/page-head";
 import {
   Table,
@@ -20,27 +24,18 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { cn } from "@/lib/utils";
+import { cn, logoBase64 } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getEnquiries, searchEnquiries, getCustomers } from "@/api/data/query";
-import moment from "moment";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
 import { Button } from "@/components/ui/button";
 import { DateRange } from "react-day-picker";
 import { PopoverContent } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Enquiries } from "@/api/data/interfaces";
 
 export default function EnquiryPage() {
@@ -51,8 +46,6 @@ export default function EnquiryPage() {
   const [selectedCustomerId, setSelectedCustomerId] = useState<string | null>(
     null
   );
-  const [customerMap, setCustomerMap] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState("");
   const [enquiriesList, setEnquiriesList] = useState<Enquiries[]>([]);
 
 
@@ -70,16 +63,6 @@ export default function EnquiryPage() {
 
   // UseEffect to set customerMap and filter customers
   useEffect(() => {
-    if (customers) {
-      // Create a map of customer names to their IDs
-      const map: Record<string, string> = {};
-      customers?.data.forEach((customer: any) => {
-        map[customer.name] = customer.id;
-      });
-      setCustomerMap(map);
-    }
-	console.log(enquiries?.data);
-
     if (enquiries?.data) {
       setEnquiriesList(enquiries?.data);
     }
@@ -90,11 +73,12 @@ export default function EnquiryPage() {
     setSelectedCustomerName(inputValue);
 
     if (inputValue === "") {
-      setFilteredCustomers([]); // Clear the dropdown if input is empty
-      return;
+		setFilteredCustomers([]); // Clear the dropdown if input is empty
+		setSelectedCustomerId(null);
+		return;
     }
 
-    if (customers) {
+    if (customers?.data) {
       const filtered = customers?.data
         .filter((customer: any) => {
           const fullName =
@@ -112,7 +96,13 @@ export default function EnquiryPage() {
 
   const handleCustomerSelect = (customerName: string) => {
     setSelectedCustomerName(customerName);
-    setSelectedCustomerId(customerMap[customerName] || null);
+
+	const selectedCust = customers?.data.filter((customer: any) => {
+		const fullName = `${customer.first_name} ${customer.last_name}`.toLowerCase();		
+        return fullName.includes(customerName.toLowerCase());
+	});
+	
+    setSelectedCustomerId(selectedCust[0].id);
     setFilteredCustomers([]); // Close the dropdown after selection
   };
 
@@ -128,15 +118,84 @@ export default function EnquiryPage() {
 
   const handleSearch = () => {
     const start_date = date?.from ? moment(date.from).format("YYYY-MM-DD") : "";
-    const end_date = date?.to ? moment(date.to).format("YYYY-MM-DD") : "";
+    const end_date = date?.to ? moment(date.to).format("YYYY-MM-DD") : "";	
 
     searchEnquiriesMutation.mutate({
       customer_id: selectedCustomerId || "", // Use the customer_id
-      status,
+    //   status,
       start_date, // Empty if no date selected
       end_date, // Empty if no date selected
     });
   };
+
+
+  const generatePDF = async () => {
+    const pdf = new jsPDF();
+
+    pdf.addImage(logoBase64, "PNG", 14, 10, 60, 12);
+
+    // Add a bold title below the logo
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(16);
+    pdf.text("REPORT SUMMARY", 14, 40);
+
+    // Add a bold report type below the title
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(12);
+    pdf.text("Report Type: Enquiries Report", 14, 50);
+
+    // Date Range aligned to the far right of "Report Type"
+    if (date?.from || date?.to) {
+      const formattedFrom = date?.from ? moment(date.from).format("LL") : "";
+      const formattedTo = date?.to ? moment(date.to).format("LL") : "";
+      const dateText = `Date: ${formattedFrom} – ${formattedTo}`;
+
+      const pageWidth = pdf.internal.pageSize.width;
+      const textWidth = pdf.getTextWidth(dateText);
+      pdf.text(dateText, pageWidth - textWidth - 14, 50); // Align to the right of "Report Type"
+    }
+
+    // Space before the table
+    pdf.text(" ", 14, 60);
+
+    const tableColumn = ["ID", "DATE", "NAME", "MESSAGE"];
+    const tableRows = enquiriesList.map((order) => [
+      order.id,
+      moment(order.createdAt).format("DD-MM-YYYY"),
+      order.customer_name,
+      order.message || "",
+    ]);
+
+    autoTable(pdf, {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 60,
+      theme: "grid",
+      headStyles: {
+        fillColor: [255, 255, 255],
+        textColor: [0, 0, 0],
+        lineWidth: 0.1,
+        lineColor: [0, 0, 0],
+      },
+      styles: {
+        textColor: [0, 0, 0],
+        lineWidth: 0.1,
+        lineColor: [0, 0, 0],
+      },
+    });
+
+    //footer with total count
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(12);
+    pdf.text(
+      `Total Enquiries: ${enquiriesList.length}`,
+      14,
+      pdf.internal.pageSize.height - 30
+    );
+
+    pdf.save("enquiries_report.pdf");
+  };
+
 
   return (
     <>
@@ -242,22 +301,6 @@ export default function EnquiryPage() {
                           )}
                         </div>
 
-                        <div className="flex flex-col gap-3">
-                          <Label htmlFor="status">Status:</Label>
-                          <Select onValueChange={setStatus}>
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select Status" />
-                            </SelectTrigger>
-                            <SelectContent className="bg-white">
-                              <SelectGroup>
-                                <SelectItem value="P">Pending</SelectItem>
-                                <SelectItem value="R">Rejected</SelectItem>
-                                <SelectItem value="A">Approved</SelectItem>
-                              </SelectGroup>
-                            </SelectContent>
-                          </Select>
-                        </div>
-
                         <div className="flex justify-between mt-8">
                           <Button
                             type="button"
@@ -266,6 +309,15 @@ export default function EnquiryPage() {
                           >
                             Search
                           </Button>
+
+                          <Button
+                        type="button"
+                        onClick={generatePDF}
+                        className="w-45 text-xl h-12 bg-green-600 text-white rounded hover:bg-green-700 uppercase tracking-wider"
+                      >
+                        Download PDF
+                      </Button>
+
                           <Button
                             type="button"
                             onClick={() => navigate(-1)}
@@ -273,6 +325,9 @@ export default function EnquiryPage() {
                           >
                             Back
                           </Button>
+
+                          
+
                         </div>
                       </div>
                     </form>

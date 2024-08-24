@@ -1,16 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useMutation } from "@tanstack/react-query";
+import { addUserRecord } from "@/api/data/query";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AdminManagementForm = () => {
+  const navigate = useNavigate();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const [formData, setFormData] = useState({
-    fullName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    role: "Sales Manager",
+    user_role: "",
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { id, value } = e.target;
@@ -20,19 +28,50 @@ const AdminManagementForm = () => {
     }));
   };
 
+
+  const addUserMutation = useMutation({
+    mutationFn: addUserRecord,
+    onSuccess: (res: any) => {
+      if (res.response_code == "014") {
+        toast.success("User record created successfully!");
+        navigate('/settings/admin');
+      }else{
+        toast.error(
+          res.response_message || "An error occurred. Please try again."
+        );
+      }
+    },
+    onError: (error: any) => {
+      toast.error(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
+    },
+  });
+
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords don't match. Please check and try again!");
+      return;
+    }
+
+    addUserMutation.mutate(formData);
   };
 
+
+  
   const handleCancel = () => {
     setFormData({
-      fullName: "",
+      first_name: "",
+      last_name: "",
       email: "",
       password: "",
       confirmPassword: "",
-      role: "Sales Manager",
+      user_role: "",
     });
+    navigate('/settings/admin');
   };
 
   return (
@@ -43,11 +82,11 @@ const AdminManagementForm = () => {
             <h1 className="text-2xl font-bold text-gray-900 mb-6">Admin Management</h1>
             <p className="text-gray-700 mb-4">The new admin has been added successfully.</p>
             <p className="text-gray-700 mb-4">
-              <strong>Name:</strong> {formData.fullName}
+              <strong>Name:</strong> {formData.first_name} {formData.last_name}
               <br />
               <strong>Email:</strong> {formData.email}
               <br />
-              <strong>Role:</strong> {formData.role}
+              <strong>Role:</strong> {formData.user_role}
             </p>
             <p className="text-gray-700 mb-8">
               An email has been sent to the new admin with their login credentials and instructions for their first login.
@@ -66,13 +105,26 @@ const AdminManagementForm = () => {
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="flex items-center">
-                <label className="block text-gray-700 font-medium w-1/4" htmlFor="fullName">
-                  Full Name:
+                <label className="block text-gray-700 font-medium w-1/4" htmlFor="first_name">
+                  First Name:
                 </label>
                 <input
                   type="text"
-                  id="fullName"
-                  value={formData.fullName}
+                  id="first_name"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                  className="w-3/4 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  required
+                />
+              </div>
+              <div className="flex items-center">
+                <label className="block text-gray-700 font-medium w-1/4" htmlFor="last_name">
+                  Last Name:
+                </label>
+                <input
+                  type="text"
+                  id="last_name"
+                  value={formData.last_name}
                   onChange={handleChange}
                   className="w-3/4 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                   required
@@ -127,10 +179,11 @@ const AdminManagementForm = () => {
                 </label>
                 <select
                   id="role"
-                  value={formData.role}
+                  value={formData.user_role}
                   onChange={handleChange}
                   className="w-3/4 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                 >
+                  <option value="Admin">Administrator</option>
                   <option value="Sales Manager">Sales Manager</option>
                   {/* Add more roles as needed */}
                 </select>

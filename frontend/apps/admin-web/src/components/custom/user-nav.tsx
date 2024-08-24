@@ -68,7 +68,10 @@ export default function UserNav() {
         navigate('/login')
 
       } else {
-          toast.error(res?.response_message || "An error occurred during logout. Please try again.");
+        Cookies.remove('token');
+        Cookies.remove('user');
+        toast.success( "You logged out successfully.");
+        navigate('/login');
       }
 
     } catch (error) {

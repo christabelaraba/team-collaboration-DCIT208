@@ -4,6 +4,7 @@ import './index.css'
 import AppProvider from './providers'
 import AppRouter from './routes'
 
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
      <AppProvider>

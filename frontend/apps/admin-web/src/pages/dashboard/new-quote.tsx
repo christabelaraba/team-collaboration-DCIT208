@@ -42,7 +42,7 @@ export default function NewQuote() {
 
 
 	const { data: products } = useQuery({
-		queryFn: getProducts,
+		queryFn: () => getProducts(),
 		queryKey: ['products'],
 	})
 
@@ -52,20 +52,25 @@ export default function NewQuote() {
 	})
 
 
-	useEffect(() => {   
+	useEffect(() => {  
 		if (products?.data) {
 			setProductList(products?.data);
 		}
 	}, [products]);
 
+
 	useEffect(() => {
-		if (quoteIdRecord?.data?.response_code === '000') {
-			setQuoteId(quoteIdRecord.data.data)
+		if (quoteIdRecord?.response_code === "000") {
+			setQuoteId(quoteIdRecord.data)
 		}
 	}, [quoteIdRecord])
 
+
 	const handleProductChange = (value: any) => {
-		setSelectedProductId(value)
+		const prod = productList.filter((product) => product.model === value);
+		if(prod.length > 0){
+			setSelectedProductId(prod[0].id.toString());
+		}
 	}
 
 	const createQuoteMutation = useMutation({
@@ -81,6 +86,8 @@ export default function NewQuote() {
 			return
 		}
 
+		// Update the product_id in formData
+		formData.product_id = selectedProductId;
 		const res: any = await createQuoteMutation.mutateAsync(formData)
 
 		if (res.data.response_code === '007') {
@@ -187,7 +194,7 @@ export default function NewQuote() {
 										</div>
 										<div className='grid gap-3'>
 											<Label htmlFor='product_id'>
-												Generator: {selectedProductId ? selectedProductId : 'Select a Generator'}
+												Generator:
 											</Label>
 											<Select name='product_id' onValueChange={handleProductChange}>
 												<SelectTrigger>
@@ -196,7 +203,7 @@ export default function NewQuote() {
 												<SelectContent className='bg-white'>
 													<SelectGroup>
 														{productList?.map((product: any) => (
-															<SelectItem key={product.id} value={product.id}>
+															<SelectItem key={product.id} value={product.model}>
 																{product.model}
 															</SelectItem>
 														))}

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
 import { useNavigate } from 'react-router-dom';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,7 +30,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+import { cn, logoBase64 } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
@@ -83,6 +84,11 @@ export default function AllQuote() {
   const handleCustomerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.toLowerCase();
     setSelectedCustomerName(inputValue);
+
+    if (inputValue === "") {
+      setFilteredCustomers([]); // Clear the dropdown if input is empty
+      return;
+    }
 
     if (quotes?.data) {
       const customers = quotes?.data
@@ -146,6 +152,71 @@ export default function AllQuote() {
         return status;
     }
   };
+
+
+  const generatePDF = async () => {
+    const pdf = new jsPDF();
+
+    pdf.addImage(logoBase64, "PNG", 14, 10, 60, 12);
+
+    // Add a bold title below the logo
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(16);
+    pdf.text("REPORT SUMMARY", 14, 40);
+
+    // Add a bold report type below the title
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(12);
+    pdf.text("Report Type: Generators Report", 14, 50);
+
+    // Space before the table
+    pdf.text(" ", 14, 60);
+
+    const tableColumn = [
+      "ID",
+      "DATE",
+      "CUSTOMER NAME",
+      "PRICE",
+      "STATUS",
+    ];
+    const tableRows = quotesList.map((quote) => [
+      quote.id,
+      moment(quote.created_at).format("DD-MM-YYYY"),
+      quote.customer_name,
+      quote.price,
+      (quote.status == "A") ? "Approved" : (quote.status == "R") ? "Rejected" : "Pending"
+    ]);
+
+    autoTable(pdf, {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 60,
+      theme: "grid",
+      headStyles: {
+        fillColor: [255, 255, 255],
+        textColor: [0, 0, 0],
+        lineWidth: 0.1,
+        lineColor: [0, 0, 0],
+      },
+      styles: {
+        textColor: [0, 0, 0],
+        lineWidth: 0.1,
+        lineColor: [0, 0, 0],
+      },
+    });
+
+    //footer with total count
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(12);
+    pdf.text(
+      `Total Quotes: ${quotesList.length}`,
+      14,
+      pdf.internal.pageSize.height - 30
+    );
+
+    pdf.save("quotes_report.pdf");
+  };
+  
 
   return (
     <>
@@ -274,6 +345,15 @@ export default function AllQuote() {
                           >
                             Search
                           </Button>
+
+                          <Button
+                        type="button"
+                        onClick={generatePDF}
+                        className="w-45 text-xl h-12 bg-green-600 text-white rounded hover:bg-green-700 uppercase tracking-wider"
+                      >
+                        Download PDF
+                      </Button>
+                      
                           <Button
                             type="button"
                             onClick={() => navigate(-1)}
@@ -303,7 +383,7 @@ export default function AllQuote() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {quotesList.map((quote: any) => (
+                    {quotesList?.map((quote: any) => (
                       <TableRow key={quote.id} className="border-none ">
                         <TableCell className="font-medium">
                           {quote.quote_id}
